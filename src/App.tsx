@@ -6,14 +6,7 @@ import Settings from './Settings';
 import Reader from './Reader';
 import { v4 as uuidv4 } from 'uuid';
 
-interface Word {
-  hanzi: string;
-  pinyin: string;
-  translation: string;
-}
-
 const App: React.FC = () => {
-  const [text, setText] = useState<Word[]>([]);
   const [knownWords, setKnownWords] = useState<string[]>([]);
   const [page, setPage] = useState<'home' | 'reader' | 'settings'>('home');
   const [selectedText, setSelectedText] = useState<any>(null);
