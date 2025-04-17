@@ -36,13 +36,18 @@ const App: React.FC = () => {
       <input type="file" accept="application/json" onChange={handleImportJSON} />
       <div className="text-container">
         {text.map((word, index) => (
-          <div key={index} className="word">
+          <div key={index} className="word"
+              onClick={() => markAsKnown(word.hanzi)}
+          >
             <div className="pinyin">{word.pinyin}</div>
-            <div className="hanzi">{word.hanzi}</div>
+            <div 
+              className="hanzi"
+            >
+              {word.hanzi}
+            </div>
             {!knownWords.includes(word.hanzi) && (
               <div className="translation">
                 {word.translation}
-                <button onClick={() => markAsKnown(word.hanzi)}>Mark as Known</button>
               </div>
             )}
           </div>

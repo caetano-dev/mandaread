@@ -5,6 +5,19 @@
   text-align: center;
 }
 
+.text-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.pinyin{
+  font-size: 1em;
+  color: #3a3a3a;
+}
+.hanzi{
+  font-size: 2em;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
