@@ -29,6 +29,7 @@ const Reader: React.FC<ReaderProps> = ({ text, knownWords, setKnownWords, onBack
   return (
     <div className={styles.readerContainer}>
       <button className={styles.backButton} onClick={onBack}>Back</button>
+      <p>Click on the hanzi you already know to add them to your personal vocabulary.</p>
       <h2 className={styles.textTitle}>{text.title}</h2>
       <div className={styles.wordsWrapper}> 
         {words.map((word, idx) => (
