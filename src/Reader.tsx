@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import db from './database';
-import styles from './Reader.module.css'; // Import CSS Module
+import styles from './Reader.module.css';
 
 interface Word {
   hanzi: string;
@@ -16,7 +16,6 @@ interface ReaderProps {
 }
 
 const Reader: React.FC<ReaderProps> = ({ text, knownWords, setKnownWords, onBack }) => {
-  const [hoveredWord, setHoveredWord] = useState<string | null>(null);
   const words: Word[] = JSON.parse(text.content);
 
   const markAsKnown = async (word: string) => {
@@ -37,8 +36,6 @@ const Reader: React.FC<ReaderProps> = ({ text, knownWords, setKnownWords, onBack
             <div className={styles.pinyin}>{word.pinyin}</div>
             <div
               className={styles.hanzi}
-              onMouseEnter={() => setHoveredWord(word.hanzi)}
-              onMouseLeave={() => setHoveredWord(null)}
               onClick={() => markAsKnown(word.hanzi)}
             >
               {word.hanzi}
@@ -46,11 +43,6 @@ const Reader: React.FC<ReaderProps> = ({ text, knownWords, setKnownWords, onBack
             {!knownWords.includes(word.hanzi) && (
               <div className={styles.translation}>
                 {word.translation}
-                {hoveredWord === word.hanzi && (
-                  <button className={styles.markKnownButton} onClick={() => markAsKnown(word.hanzi)}>
-                    Mark Known
-                  </button>
-                )}
               </div>
             )}
           </div>

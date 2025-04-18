@@ -4,7 +4,7 @@ import HomePage from './HomePage';
 import Settings from './Settings';
 import Reader from './Reader';
 import { v4 as uuidv4 } from 'uuid';
-import styles from './App.module.css'; // Import CSS Module
+import styles from './App.module.css'; 
 
 const App: React.FC = () => {
   const [knownWords, setKnownWords] = useState<string[]>([]);
@@ -49,6 +49,7 @@ const App: React.FC = () => {
   return (
     <div className={styles.app} style={{ fontSize: `${fontSize}px` }}>
       <nav className={styles.nav}>
+        <h1>Mandaread</h1>
         <button onClick={() => setPage('home')}>Home</button>
         <button onClick={() => setPage('settings')}>Settings</button>
       </nav>
