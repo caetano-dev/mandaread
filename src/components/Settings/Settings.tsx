@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import db from './database';
+import db from '../../db/database';
 import styles from './Settings.module.css'; // Import CSS Module
 
 interface SettingsProps {

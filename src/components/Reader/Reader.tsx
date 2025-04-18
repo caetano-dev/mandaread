@@ -1,5 +1,5 @@
 import React from 'react';
-import db from './database';
+import db from '../../db/database';
 import styles from './Reader.module.css';
 
 interface Word {

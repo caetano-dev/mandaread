@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import db from './database';
+import db from '../../db/database';
 import styles from './HomePage.module.css';
 
 interface TextPreview {

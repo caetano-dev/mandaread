@@ -1,54 +1,116 @@
-# React + TypeScript + Vite
+# Mandaread - Mandarin Reading Program
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Mandaread is a web application designed to help users improve their Mandarin reading skills. It allows importing Mandarin texts (provided in a specific JSON format including Hanzi, Pinyin, and English translation), displays them with Pinyin above each character, and shows translations for words not yet marked as "known" by the user.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+*   **JSON Input:** Accepts Mandarin text structured in a specific JSON format (see below).
+*   **Homepage:**
+    *   Displays a list of all imported texts.
+    *   Shows a preview of the first 15 words of each text.
+    *   Allows users to select a text to read.
+    *   Allows users to delete imported texts.
+    *   Provides a button to import new texts via JSON file upload.
+*   **Reading Interface:**
+    *   Displays the full Mandarin text.
+    *   Shows Pinyin transcription above each Hanzi character.
+    *   Displays the English translation below words that are *not* in the user's known vocabulary list.
+    *   Allows users to click on any Hanzi word to mark it as "known", instantly hiding its translation and adding it to the persistent vocabulary list.
+    *   Words are displayed inline, flowing like a standard text.
+*   **Settings Page:**
+    *   Allows users to import and export their known vocabulary list as a JSON file.
+    *   Provides a slider to adjust the base font size for the reading interface.
+    *   Displays the list of known words with an option to delete individual words.
+*   **Persistent Storage:**
+    *   Uses IndexedDB (via Dexie.js) in the browser to store:
+        *   Imported texts.
+        *   The user's known vocabulary list.
+        *   User settings (like font size).
+    *   All data persists across browser sessions.
+*   **Styling:** Uses CSS Modules for component-scoped styling.
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+*   **Frontend Framework:** React (with TypeScript)
+*   **Build Tool:** Vite
+*   **Local Storage:** IndexedDB via Dexie.js
+*   **Styling:** CSS Modules
+*   **UUID:** `uuid` library for generating unique text IDs.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
+## Getting Started
+
+1.  **Clone the repository:**
+    ```bash
+    git clone <repository-url>
+    cd mandaread
+    ```
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+    The application will be available at `http://localhost:5173` (or another port if 5173 is busy).
+
+## Project Structure
+
+*   `public/`: Static assets (e.g., `vite.svg`).
+*   `src/`:
+    *   `components/`: React components organized by feature.
+        *   `HomePage/`: Files related to the home page (`HomePage.tsx`, `HomePage.module.css`).
+        *   `Reader/`: Files related to the reading interface (`Reader.tsx`, `Reader.module.css`).
+        *   `Settings/`: Files related to the settings page (`Settings.tsx`, `Settings.module.css`).
+    *   `db/`: Database setup (`database.ts`).
+    *   `assets/`: Image assets (`react.svg`).
+    *   `App.tsx`: Main application component (handles routing, global state).
+    *   `App.module.css`: CSS Module for the main App component.
+    *   `index.css`: Global CSS styles.
+    *   `main.tsx`: Entry point of the React application.
+    *   `vite-env.d.ts`: TypeScript definitions for Vite environment variables.
+*   `eslint.config.js`: ESLint configuration.
+*   `index.html`: Main HTML entry point.
+*   `package.json`: Project dependencies and scripts.
+*   `README.md`: This file.
+*   `tsconfig.*.json`: TypeScript configurations.
+*   `vite.config.ts`: Vite configuration.
+
+## JSON Input Format
+
+Texts must be imported as a JSON file containing an array of word objects. Each object must have `hanzi`, `pinyin`, and `translation` properties.
+
+**Example:**
+
+```json
+[
+  {
+    "hanzi": "我",
+    "pinyin": "wǒ",
+    "translation": "I"
   },
-})
+  {
+    "hanzi": "喜欢",
+    "pinyin": "xǐhuan",
+    "translation": "like"
+  },
+  {
+    "hanzi": "苹果",
+    "pinyin": "píngguǒ",
+    "translation": "apple"
+  }
+]
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Vocabulary JSON Format
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+When exporting or importing vocabulary, the JSON file should contain a simple array of strings, where each string is a known Hanzi word.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+**Example:**
+
+```json
+[
+  "我",
+  "喜欢"
+]
 ```

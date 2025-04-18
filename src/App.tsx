@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import db from './database';
-import HomePage from './HomePage';
-import Settings from './Settings';
-import Reader from './Reader';
+import db from './db/database';
+import HomePage from './components/HomePage/HomePage';
+import Settings from './components/Settings/Settings';
+import Reader from './components/Reader/Reader';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './App.module.css'; 
 
