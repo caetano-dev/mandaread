@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import db from './database';
+import styles from './Reader.module.css'; // Import CSS Module
 
 interface Word {
   hanzi: string;
@@ -11,11 +12,11 @@ interface ReaderProps {
   text: { id: string; title: string; content: string };
   knownWords: string[];
   setKnownWords: (words: string[]) => void;
-  fontSize: number;
   onBack: () => void;
 }
 
-const Reader: React.FC<ReaderProps> = ({ text, knownWords, setKnownWords, fontSize, onBack }) => {
+const Reader: React.FC<ReaderProps> = ({ text, knownWords, setKnownWords, onBack }) => {
+  const [hoveredWord, setHoveredWord] = useState<string | null>(null);
   const words: Word[] = JSON.parse(text.content);
 
   const markAsKnown = async (word: string) => {
@@ -27,22 +28,29 @@ const Reader: React.FC<ReaderProps> = ({ text, knownWords, setKnownWords, fontSi
   };
 
   return (
-    <div className="p-4" style={{ fontSize }}>
-      <button className="mb-4 px-4 py-2 bg-gray-300 rounded" onClick={onBack}>Back</button>
-      <h2 className="text-xl font-bold mb-4">{text.title}</h2>
-      <div className="grid gap-2 background-red-100"> 
+    <div className={styles.readerContainer}>
+      <button className={styles.backButton} onClick={onBack}>Back</button>
+      <h2 className={styles.textTitle}>{text.title}</h2>
+      <div className={styles.wordsWrapper}> 
         {words.map((word, idx) => (
-          <div key={idx}>
-            <div className="text-xs text-gray-500">{word.pinyin}</div>
+          <div key={idx} className={styles.wordUnit}>
+            <div className={styles.pinyin}>{word.pinyin}</div>
             <div
-              className="hanzi cursor-pointer background-red-100"
+              className={styles.hanzi}
+              onMouseEnter={() => setHoveredWord(word.hanzi)}
+              onMouseLeave={() => setHoveredWord(null)}
               onClick={() => markAsKnown(word.hanzi)}
             >
               {word.hanzi}
             </div>
             {!knownWords.includes(word.hanzi) && (
-              <div className="text-xs text-blue-600">
+              <div className={styles.translation}>
                 {word.translation}
+                {hoveredWord === word.hanzi && (
+                  <button className={styles.markKnownButton} onClick={() => markAsKnown(word.hanzi)}>
+                    Mark Known
+                  </button>
+                )}
               </div>
             )}
           </div>

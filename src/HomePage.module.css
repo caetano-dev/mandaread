@@ -1,0 +1,73 @@
+.homePage {
+  padding: 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.importButton {
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.textList {
+  list-style: none;
+  padding: 0;
+}
+
+.textItem {
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .textItem {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.textInfo {
+  flex-grow: 1;
+  cursor: pointer;
+}
+
+.textTitle {
+  font-weight: 600;
+}
+
+.textPreview {
+  color: #555;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.deleteButton {
+  margin-left: 1rem; /* Only applies on larger screens due to flex-direction change */
+  margin-top: 0.5rem; /* Only applies on smaller screens */
+  padding: 0.25rem 0.5rem;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+@media (min-width: 768px) {
+  .deleteButton {
+    margin-top: 0;
+  }
+}

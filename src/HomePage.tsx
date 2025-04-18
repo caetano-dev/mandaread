@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import db from './database';
+import styles from './HomePage.module.css';
 
 interface TextPreview {
   id: string;
@@ -25,19 +26,19 @@ const HomePage: React.FC<HomePageProps> = ({ onSelect, onImport }) => {
   };
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Your Imported Texts</h2>
-      <button className="mb-4 px-4 py-2 bg-blue-500 text-white rounded" onClick={onImport}>Import New Text</button>
-      <ul>
+    <div className={styles.homePage}>
+      <h2 className={styles.title}>Your Imported Texts</h2>
+      <button className={styles.importButton} onClick={onImport}>Import New Text</button>
+      <ul className={styles.textList}>
         {texts.map((t) => (
-          <li key={t.id} className="mb-4 border p-2 rounded flex flex-col md:flex-row md:items-center justify-between">
-            <div className="flex-1 cursor-pointer" onClick={() => onSelect(t)}>
-              <div className="font-semibold">{t.title}</div>
-              <div className="text-gray-600 text-sm truncate">
+          <li key={t.id} className={styles.textItem}>
+            <div className={styles.textInfo} onClick={() => onSelect(t)}>
+              <div className={styles.textTitle}>{t.title}</div>
+              <div className={styles.textPreview}>
                 {JSON.parse(t.content).slice(0, 15).map((w: any) => w.hanzi).join(' ')}
               </div>
             </div>
-            <button className="ml-4 px-2 py-1 bg-red-500 text-white rounded" onClick={() => handleDelete(t.id)}>Delete</button>
+            <button className={styles.deleteButton} onClick={() => handleDelete(t.id)}>Delete</button>
           </li>
         ))}
       </ul>

@@ -1,0 +1,15 @@
+.app {
+  /* Styles for the main app container */
+}
+
+.nav {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 1rem;
+}
+
+.hiddenInput {
+  display: none;
+}

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import db from './database';
-import './App.css';
 import HomePage from './HomePage';
 import Settings from './Settings';
 import Reader from './Reader';
 import { v4 as uuidv4 } from 'uuid';
+import styles from './App.module.css'; // Import CSS Module
 
 const App: React.FC = () => {
   const [knownWords, setKnownWords] = useState<string[]>([]);
@@ -47,8 +47,8 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="app" style={{ fontSize }}>
-      <nav className="flex gap-4 p-2 border-b mb-2">
+    <div className={styles.app} style={{ fontSize: `${fontSize}px` }}>
+      <nav className={styles.nav}>
         <button onClick={() => setPage('home')}>Home</button>
         <button onClick={() => setPage('settings')}>Settings</button>
       </nav>
@@ -60,14 +60,13 @@ const App: React.FC = () => {
           text={selectedText}
           knownWords={knownWords}
           setKnownWords={setKnownWords}
-          fontSize={fontSize}
           onBack={handleBack}
         />
       )}
       {page === 'settings' && (
         <Settings knownWords={knownWords} setKnownWords={setKnownWords} fontSize={fontSize} setFontSize={setFontSize} />
       )}
-      <input id="import-input" type="file" accept="application/json" style={{ display: 'none' }} onChange={handleImportJSON} />
+      <input id="import-input" type="file" accept="application/json" className={styles.hiddenInput} onChange={handleImportJSON} />
     </div>
   );
 };

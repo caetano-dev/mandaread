@@ -1,0 +1,42 @@
+.settingsPage {
+  padding: 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.settingItem {
+  margin-bottom: 1rem;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.fontSizeValue {
+  margin-left: 0.5rem;
+}
+
+.buttonGroup button {
+  margin-right: 0.5rem;
+}
+
+.exportButton {
+  background-color: #28a745;
+  color: white;
+  border: none;
+}
+
+.importButton {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.hiddenInput {
+  display: none;
+}
