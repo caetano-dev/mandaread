@@ -1,28 +1,25 @@
 import React from 'react';
 import db from '../../db/database';
 import styles from './Reader.module.css';
-
-interface Word {
-  hanzi: string;
-  pinyin: string;
-  translation: string;
-}
-
+import { v4 as uuidv4 } from 'uuid';
+import { Word } from '../../types/index';
 interface ReaderProps {
   text: { id: string; title: string; content: string };
-  knownWords: string[];
-  setKnownWords: (words: string[]) => void;
+  knownWords: Word[];
+  setKnownWords: (words: Word[]) => void;
   onBack: () => void;
 }
 
 const Reader: React.FC<ReaderProps> = ({ text, knownWords, setKnownWords, onBack }) => {
   const words: Word[] = JSON.parse(text.content);
+  const wordIsKnown = (word: Word) => knownWords.some(knownWord => knownWord.hanzi === word.hanzi)
 
-  const markAsKnown = async (word: string) => {
-    if (!knownWords.includes(word)) {
+  const markAsKnown = async (word: Word) => {
+    if (!wordIsKnown(word)) {
       const newWords = [...knownWords, word];
       setKnownWords(newWords);
-      await db.vocabulary.add({ word, pinyin: '', translation: '' });
+      const id = uuidv4();
+      await db.vocabulary.add({ id, hanzi: word.hanzi, pinyin: word.pinyin, translation: word.translation });
     }
   };
 
@@ -37,11 +34,11 @@ const Reader: React.FC<ReaderProps> = ({ text, knownWords, setKnownWords, onBack
             <div className={styles.pinyin}>{word.pinyin}</div>
             <div
               className={styles.hanzi}
-              onClick={() => markAsKnown(word.hanzi)}
+              onClick={() => markAsKnown(word)}
             >
               {word.hanzi}
             </div>
-            {!knownWords.includes(word.hanzi) && (
+          {!wordIsKnown(word) && (
               <div className={styles.translation}>
                 {word.translation}
               </div>

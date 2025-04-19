@@ -4,16 +4,17 @@ import HomePage from './components/HomePage/HomePage';
 import Settings from './components/Settings/Settings';
 import Reader from './components/Reader/Reader';
 import { v4 as uuidv4 } from 'uuid';
+import { Word } from './types/index';
 import styles from './App.module.css'; 
 
 const App: React.FC = () => {
-  const [knownWords, setKnownWords] = useState<string[]>([]);
+  const [knownWords, setKnownWords] = useState<Word[]>([]);
   const [page, setPage] = useState<'home' | 'reader' | 'settings'>('home');
   const [selectedText, setSelectedText] = useState<any>(null);
   const [fontSize, setFontSize] = useState<number>(20);
 
   useEffect(() => {
-    db.vocabulary.toArray().then(words => setKnownWords(words.map(w => w.word)));
+    db.vocabulary.toArray().then(words => setKnownWords(words.map(w => ({ id: w.id, hanzi: w.hanzi, pinyin: w.pinyin, translation: w.translation }))));
     db.settings.get('fontSize').then(s => s && setFontSize(s.value));
   }, []);
 

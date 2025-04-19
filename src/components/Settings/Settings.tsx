@@ -1,10 +1,11 @@
 import React, { useRef } from 'react';
 import db from '../../db/database';
-import styles from './Settings.module.css'; // Import CSS Module
+import styles from './Settings.module.css';
+import { Word } from '../../types/index';
 
 interface SettingsProps {
-  knownWords: string[];
-  setKnownWords: (words: string[]) => void;
+  knownWords: Word[];
+  setKnownWords: (words: Word[]) => void;
   fontSize: number;
   setFontSize: (size: number) => void;
 }
@@ -30,21 +31,26 @@ const Settings: React.FC<SettingsProps> = ({ knownWords, setKnownWords, fontSize
       reader.onload = async (event) => {
         const content = event.target?.result as string;
         try {
-          const words: string[] = JSON.parse(content);
+          const words: Word[] = JSON.parse(content);
           setKnownWords(words);
           await db.vocabulary.clear();
-          await db.vocabulary.bulkAdd(words.map(word => ({ word, pinyin: '', translation: '' })));
-        } catch {}
+          await db.vocabulary.bulkAdd(words.map(word => ({id: word.id, hanzi: word.hanzi, pinyin: word.pinyin, translation: word.translation })));
+        } catch (error) {
+          console.error("Error importing words:", error);
+        }
       };
       reader.readAsText(file);
     }
   };
 
   const handleDeleteWord = (index: number) => {
-    const newWords = [...knownWords];
-    newWords.splice(index, 1);
-    setKnownWords(newWords);
-    db.vocabulary.delete(newWords[index]);
+    const updatedWords = knownWords.filter((_, i) => i !== index);
+    setKnownWords(updatedWords);
+//    db.vocabulary.delete(knownWords[index].hanzi);
+    db.vocabulary.delete(knownWords[index].hanzi);
+    db.vocabulary.delete(knownWords[index].pinyin);
+    db.vocabulary.delete(knownWords[index].translation);
+    db.vocabulary.delete(knownWords[index].id);
   };
 
   return (
@@ -65,7 +71,9 @@ const Settings: React.FC<SettingsProps> = ({ knownWords, setKnownWords, fontSize
         <ul className={styles.vocabularyList}>
           {knownWords.map((word, index) => (
             <li key={index} className={styles.vocabularyItem}>
-              <span>{word}</span>
+              <span>{word.hanzi}</span>
+              <span>{word.pinyin}</span>
+              <span>{word.translation}</span>
               <button className={styles.deleteButton} onClick={() => handleDeleteWord(index)}>Delete</button>
             </li>
           ))}

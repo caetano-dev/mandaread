@@ -40,3 +40,9 @@
 .hiddenInput {
   display: none;
 }
+
+li{
+  display: flex;
+  justify-content:space-between;
+  text-align: center;
+}
