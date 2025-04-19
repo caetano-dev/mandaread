@@ -14,7 +14,7 @@ const App: React.FC = () => {
   const [fontSize, setFontSize] = useState<number>(20);
 
   useEffect(() => {
-    db.vocabulary.toArray().then(words => setKnownWords(words.map(w => ({ id: w.id, hanzi: w.hanzi, pinyin: w.pinyin, translation: w.translation }))));
+    db.vocabulary.toArray().then(words => setKnownWords(words.map(w => ({ hanzi: w.hanzi, pinyin: w.pinyin, translation: w.translation }))));
     db.settings.get('fontSize').then(s => s && setFontSize(s.value));
   }, []);
 

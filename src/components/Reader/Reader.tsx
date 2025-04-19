@@ -1,7 +1,6 @@
 import React from 'react';
 import db from '../../db/database';
 import styles from './Reader.module.css';
-import { v4 as uuidv4 } from 'uuid';
 import { Word } from '../../types/index';
 interface ReaderProps {
   text: { id: string; title: string; content: string };
@@ -18,8 +17,7 @@ const Reader: React.FC<ReaderProps> = ({ text, knownWords, setKnownWords, onBack
     if (!wordIsKnown(word)) {
       const newWords = [...knownWords, word];
       setKnownWords(newWords);
-      const id = uuidv4();
-      await db.vocabulary.add({ id, hanzi: word.hanzi, pinyin: word.pinyin, translation: word.translation });
+      await db.vocabulary.add({ hanzi: word.hanzi, pinyin: word.pinyin, translation: word.translation });
     }
   };
 

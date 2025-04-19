@@ -34,7 +34,7 @@ const Settings: React.FC<SettingsProps> = ({ knownWords, setKnownWords, fontSize
           const words: Word[] = JSON.parse(content);
           setKnownWords(words);
           await db.vocabulary.clear();
-          await db.vocabulary.bulkAdd(words.map(word => ({id: word.id, hanzi: word.hanzi, pinyin: word.pinyin, translation: word.translation })));
+          await db.vocabulary.bulkAdd(words.map(word => ({hanzi: word.hanzi, pinyin: word.pinyin, translation: word.translation })));
         } catch (error) {
           console.error("Error importing words:", error);
         }
@@ -48,9 +48,6 @@ const Settings: React.FC<SettingsProps> = ({ knownWords, setKnownWords, fontSize
     setKnownWords(updatedWords);
 //    db.vocabulary.delete(knownWords[index].hanzi);
     db.vocabulary.delete(knownWords[index].hanzi);
-    db.vocabulary.delete(knownWords[index].pinyin);
-    db.vocabulary.delete(knownWords[index].translation);
-    db.vocabulary.delete(knownWords[index].id);
   };
 
   return (
