@@ -1,9 +1,35 @@
+/* General App Styles */
+.app {
+  max-width: 900px; /* Limit max width for better readability on large screens */
+  margin: 0 auto; /* Center the app */
+  padding: 1rem;
+  font-family: sans-serif;
+}
+
 .nav {
   display: flex;
+  align-items: center; /* Align items vertically */
   gap: 1rem;
-  padding: 0.5rem;
-  border-bottom: 1px solid #ccc;
-  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #444; /* Slightly darker border */
+  margin-bottom: 1.5rem; /* Increased margin */
+}
+
+.nav h1 {
+  margin: 0; /* Remove default margin */
+  margin-right: auto; /* Push buttons to the right */
+  font-size: 1.5rem;
+}
+
+.nav button {
+  background-color: #333;
+  border: none;
+  color: #eee;
+}
+
+.nav button:hover {
+  background-color: #444;
+  border-color: transparent; /* Override default button hover */
 }
 
 .hiddenInput {

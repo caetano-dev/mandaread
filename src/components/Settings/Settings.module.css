@@ -9,12 +9,17 @@
 }
 
 .settingItem {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem; /* Increase spacing */
+  padding: 1rem;
+  border: 1px solid #444;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.03);
 }
 
 .label {
   display: block;
   margin-bottom: 0.5rem;
+  font-weight: bold;
 }
 
 .fontSizeValue {
@@ -41,8 +46,65 @@
   display: none;
 }
 
-li{
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #eee;
+}
+
+/* Add styles for the search bar */
+.searchBar {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #333;
+  color: #eee;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.vocabularyList {
+  list-style: none;
+  padding: 0;
+  max-height: 300px; /* Limit height and make scrollable */
+  overflow-y: auto;
+  border: 1px solid #555;
+  border-radius: 4px;
+}
+
+.vocabularyItem {
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #555;
+}
+
+.vocabularyItem:last-child {
+  border-bottom: none;
+}
+
+.vocabularyItem span {
+  margin-right: 1rem;
+}
+
+.deleteButton {
+  background-color: #b03030;
+  color: white;
+  border: none;
+  padding: 0.3em 0.6em;
+  font-size: 0.9em;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  background-color: #c84040;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
   text-align: center;
 }

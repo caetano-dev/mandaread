@@ -50,7 +50,7 @@ const App: React.FC = () => {
   return (
     <div className={styles.app} style={{ fontSize: `${fontSize}px` }}>
       <nav className={styles.nav}>
-        <h1>Mandaread</h1>
+        <h1 onClick={() => setPage('home')}>Mandaread</h1>
         <button onClick={() => setPage('home')}>Home</button>
         <button onClick={() => setPage('settings')}>Settings</button>
       </nav>

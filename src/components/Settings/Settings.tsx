@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react'; // Added useState
 import db from '../../db/database';
 import styles from './Settings.module.css';
 import { Word } from '../../types/index';
@@ -12,6 +12,7 @@ interface SettingsProps {
 
 const Settings: React.FC<SettingsProps> = ({ knownWords, setKnownWords, fontSize, setFontSize }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [searchQuery, setSearchQuery] = useState(''); // State for search query
 
   const handleExport = () => {
     const data = JSON.stringify(knownWords, null, 2);
@@ -44,11 +45,23 @@ const Settings: React.FC<SettingsProps> = ({ knownWords, setKnownWords, fontSize
   };
 
   const handleDeleteWord = (index: number) => {
-    const updatedWords = knownWords.filter((_, i) => i !== index);
-    setKnownWords(updatedWords);
-//    db.vocabulary.delete(knownWords[index].hanzi);
-    db.vocabulary.delete(knownWords[index].hanzi);
+    // Find the actual word object based on the filtered list index
+    const wordToDelete = filteredWords[index];
+    const originalIndex = knownWords.findIndex(w => w.hanzi === wordToDelete.hanzi);
+
+    if (originalIndex !== -1) {
+      const updatedWords = knownWords.filter((_, i) => i !== originalIndex);
+      setKnownWords(updatedWords);
+      db.vocabulary.delete(knownWords[originalIndex].hanzi);
+    }
   };
+
+  // Filter words based on search query
+  const filteredWords = knownWords.filter(word =>
+    word.hanzi.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    word.pinyin.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    word.translation.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className={styles.settingsPage}>
@@ -65,12 +78,22 @@ const Settings: React.FC<SettingsProps> = ({ knownWords, setKnownWords, fontSize
       </div>
       <div className={styles.settingItem}>
         <h3 className={styles.subtitle}>Manage Vocabulary</h3>
+        {/* Add Search Bar */}
+        <input
+          type="text"
+          placeholder="Search vocabulary..."
+          className={styles.searchBar}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
         <ul className={styles.vocabularyList}>
-          {knownWords.map((word, index) => (
-            <li key={index} className={styles.vocabularyItem}>
+          {/* Map over filteredWords instead of knownWords */}
+          {filteredWords.map((word, index) => (
+            <li key={word.hanzi} className={styles.vocabularyItem}> {/* Use word.hanzi as key for stability */}
               <span>{word.hanzi}</span>
               <span>{word.pinyin}</span>
               <span>{word.translation}</span>
+              {/* Pass the index from the filtered list */}
               <button className={styles.deleteButton} onClick={() => handleDeleteWord(index)}>Delete</button>
             </li>
           ))}
