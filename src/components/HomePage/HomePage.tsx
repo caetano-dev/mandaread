@@ -1,6 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import db from '../../db/database';
 import styles from './HomePage.module.css';
+import { MdContentPaste } from "react-icons/md";
+
+const prompt = `Write a story in mandarin and then output the story in this json format:
+[
+  {
+    "hanzi": "我",
+    "pinyin": "wǒ",
+    "translation": "I"
+  },
+  {
+    "hanzi": "喜欢",
+    "pinyin": "xǐhuan",
+    "translation": "like"
+  },
+  {
+    "hanzi": "苹果",
+    "pinyin": "píngguǒ",
+    "translation": "apple"
+  }
+]`;
 
 interface TextPreview {
   id: string;
@@ -15,6 +35,7 @@ interface HomePageProps {
 
 const HomePage: React.FC<HomePageProps> = ({ onSelect, onImport }) => {
   const [texts, setTexts] = useState<TextPreview[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     db.texts.toArray().then(setTexts);
@@ -23,6 +44,18 @@ const HomePage: React.FC<HomePageProps> = ({ onSelect, onImport }) => {
   const handleDelete = async (id: string) => {
     await db.texts.delete(id);
     setTexts(await db.texts.toArray());
+  };
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText('hello world');
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
   };
 
   return (
@@ -42,6 +75,20 @@ const HomePage: React.FC<HomePageProps> = ({ onSelect, onImport }) => {
           </li>
         ))}
       </ul>
+
+      <button className={styles.floatingButton} onClick={toggleModal}>
+        <MdContentPaste />
+      </button>
+
+      {isModalOpen && (
+        <div className={styles.modalOverlay} onClick={toggleModal}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <p>{prompt}</p>
+            <button onClick={copyToClipboard} className={styles.copyButton}>Copy</button>
+            <button onClick={toggleModal} className={styles.closeButton}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

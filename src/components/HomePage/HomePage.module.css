@@ -76,3 +76,80 @@
     margin-top: 0;
   }
 }
+
+.floatingButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+.floatingButton:hover {
+  background-color: #0056b3;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001; /* Ensure modal is above overlay */
+}
+
+.modalContent {
+  background-color: rgb(98, 98, 98);
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative; /* Needed for positioning close button if added */
+}
+
+.modalContent p {
+  margin-bottom: 15px;
+  font-size: 1.1em;
+}
+
+.copyButton, .closeButton {
+  padding: 8px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.copyButton {
+  background-color: #28a745; /* Green */
+  color: white;
+}
+
+.copyButton:hover {
+  background-color: #218838;
+}
+
+.closeButton {
+  background-color: #dc3545; /* Red */
+  color: white;
+}
+
+.closeButton:hover {
+  background-color: #c82333;
+}
