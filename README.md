@@ -104,13 +104,21 @@ Texts must be imported as a JSON file containing an array of word objects. Each 
 
 ## Vocabulary JSON Format
 
-When exporting or importing vocabulary, the JSON file should contain a simple array of strings, where each string is a known Hanzi word.
+When exporting or importing vocabulary, the JSON file should contain an array of word objects, where each object has `hanzi`, `pinyin`, and `translation` properties.
 
 **Example:**
 
 ```json
 [
-  "我",
-  "喜欢"
+  {
+    "hanzi": "我",
+    "pinyin": "wǒ",
+    "translation": "I"
+  },
+  {
+    "hanzi": "喜欢",
+    "pinyin": "xǐhuan",
+    "translation": "like"
+  }
 ]
 ```

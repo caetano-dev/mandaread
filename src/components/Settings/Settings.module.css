@@ -14,6 +14,8 @@
   border: 1px solid #444;
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.03);
+  justify-content: center;
+  align-items: center;
 }
 
 .label {
@@ -22,24 +24,59 @@
   font-weight: bold;
 }
 
-.fontSizeValue {
-  margin-left: 0.5rem;
+/* Style for the font size control group */
+.fontSizeControl {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.buttonGroup button {
-  margin-right: 0.5rem;
+.fontSizeValue {
+  min-width: 40px; /* Ensure space for text */
+  text-align: right;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+  gap: 0.5rem; /* Space between buttons */
+  align-items: center; /* Align items vertically */
+}
+
+.buttonGroup h3 {
+  width: 100%; /* Make label take full width */
+  margin-bottom: 0.5rem;
+}
+
+.exportButton,
+.importButton {
+  color: white;
+  border: none;
+  padding: 0.6em 1.2em;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .exportButton {
   background-color: #28a745;
-  color: white;
-  border: none;
+}
+.exportButton:hover:not(:disabled) {
+  background-color: #218838;
 }
 
 .importButton {
   background-color: #007bff;
-  color: white;
-  border: none;
+}
+.importButton:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+/* Style for disabled buttons */
+.exportButton:disabled,
+.importButton:disabled {
+  background-color: #555;
+  color: #999;
+  cursor: not-allowed;
 }
 
 .hiddenInput {
@@ -71,6 +108,14 @@
   overflow-y: auto;
   border: 1px solid #555;
   border-radius: 4px;
+  margin-top: 0.5rem; /* Add some space above the list */
+}
+
+/* Style for the 'no results' item */
+.noResultsItem {
+  padding: 0.5rem 1rem;
+  color: #aaa;
+  font-style: italic;
 }
 
 .vocabularyItem {
@@ -79,6 +124,7 @@
   align-items: center;
   padding: 0.5rem 1rem;
   border-bottom: 1px solid #555;
+  gap: 1rem; /* Add gap between elements */
 }
 
 .vocabularyItem:last-child {
@@ -86,7 +132,27 @@
 }
 
 .vocabularyItem span {
-  margin-right: 1rem;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+/* Specific styles for vocab parts for alignment */
+.vocabHanzi {
+  flex-basis: 80px; /* Give Hanzi a fixed basis */
+  font-weight: bold;
+}
+
+.vocabPinyin {
+  flex-basis: 120px; /* Give Pinyin a fixed basis */
+  color: #ccc;
+}
+
+.vocabTranslation {
+  flex-grow: 1; /* Allow translation to take remaining space */
+  text-align: left;
+  color: #aaa;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .deleteButton {
@@ -97,14 +163,10 @@
   font-size: 0.9em;
   border-radius: 4px;
   cursor: pointer;
+  margin-left: auto; /* Push delete button to the far right */
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .deleteButton:hover {
   background-color: #c84040;
-}
-
-li {
-  display: flex;
-  justify-content: space-between;
-  text-align: center;
 }

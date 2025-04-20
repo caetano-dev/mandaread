@@ -5,9 +5,15 @@
 .backButton {
   margin-bottom: 1rem;
   padding: 0.5rem 1rem;
-  background-color: #ccc;
+  background-color: #555; /* Darker background */
+  color: #eee; /* Lighter text */
   border: none;
   border-radius: 4px;
+  cursor: pointer; /* Add cursor */
+}
+
+.backButton:hover {
+  background-color: #666;
 }
 
 .textTitle {
@@ -55,6 +61,7 @@
   border-radius: 3px;
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   user-select: none; /* Prevent accidental text selection */
+  line-height: 1.2; /* Adjust line-height for hanzi */
 }
 
 /* Style for Hanzi that is NOT known - make it look clickable */
@@ -63,9 +70,11 @@
   color: #87cefa; /* Light blue color to indicate interactivity */
 }
 
-.hanziUnknown:hover {
-  background-color: rgba(135, 206, 250, 0.2); /* Light blue background on hover */
-  color: #fff; /* White text on hover */
+.hanziUnknown:hover,
+.hanziUnknown:focus { /* Add focus style for accessibility */
+  background-color: rgba(135, 206, 250, 0.2); /* Light blue background on hover/focus */
+  color: #fff; /* White text on hover/focus */
+  outline: none; /* Remove default focus outline if custom style is sufficient */
 }
 
 /* Style for Hanzi that IS known - make it look less interactive */
