@@ -7,6 +7,7 @@ import {
 } from '../../db/database';
 import styles from './Settings.module.css';
 import { Word } from '../../types/index';
+import FontSizeSlider from '../FontSizeSlider/FontSizeSlider'; // Import the new component
 
 // Helper to validate imported vocabulary data
 const isValidVocabularyImport = (data: any): data is Word[] => {
@@ -73,7 +74,7 @@ const Settings: React.FC<SettingsProps> = ({ knownWords, setKnownWords, fontSize
   }, [knownWords]);
 
   // Import vocabulary from JSON
-  const handleImport = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImport = useCallback((e: React.ChangeEvent<HTMLInputElement>) => { // Explicitly type 'e'
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -158,21 +159,7 @@ const Settings: React.FC<SettingsProps> = ({ knownWords, setKnownWords, fontSize
       <h2 className={styles.title}>Settings</h2>
 
       {/* Font Size Setting */}
-      <div className={styles.settingItem}>
-        <label htmlFor="fontSizeRange" className={styles.label}>Font Size</label>
-        <div className={styles.fontSizeControl}>
-          <input
-            id="fontSizeRange"
-            type="range"
-            min={14}
-            max={36}
-            value={fontSize}
-            onChange={e => setFontSize(Number(e.target.value))}
-            aria-labelledby="fontSizeLabel"
-          />
-          <span className={styles.fontSizeValue}>{fontSize}px</span>
-        </div>
-      </div>
+      <FontSizeSlider fontSize={fontSize} setFontSize={setFontSize} />
 
       {/* Import/Export Buttons */}
       <div className={`${styles.settingItem} ${styles.buttonGroup}`}>
@@ -196,7 +183,7 @@ const Settings: React.FC<SettingsProps> = ({ knownWords, setKnownWords, fontSize
           accept="application/json"
           ref={fileInputRef}
           className={styles.hiddenInput}
-          onChange={handleImport}
+          onChange={handleImport} // Correctly placed onChange handler
           aria-hidden="true"
         />
       </div>
