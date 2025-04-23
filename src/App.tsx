@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
   getVocabulary,
-  addText as dbAddText,
   getSetting,
   updateSetting as dbUpdateSetting,
   TextEntry
@@ -9,7 +8,6 @@ import {
 import HomePage from './components/HomePage/HomePage';
 import Settings from './components/Settings/Settings';
 import Reader from './components/Reader/Reader';
-import { v4 as uuidv4 } from 'uuid';
 import { Word } from './types/index'; // Keep Word type for component props
 import styles from './App.module.css';
 
@@ -54,39 +52,6 @@ const App: React.FC = () => {
     saveFontSize();
   }, [fontSize]);
 
-  // Handle JSON file import for new texts
-  const handleImportJSON = useCallback(async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = async (e) => {
-      const content = e.target?.result as string;
-      if (!content) return;
-
-      const title = prompt('Enter a title for this text:') || `Untitled Text ${new Date().toLocaleTimeString()}`;
-      const id = uuidv4();
-      const newText: TextEntry = { id, title, content };
-
-      try {
-        await dbAddText(newText);
-        // Optionally, refresh the text list if HomePage doesn't auto-refresh
-        setPage('home'); // Navigate home to see the new text
-      } catch (error) {
-        console.error("Error adding new text:", error);
-        alert("Failed to import text. Please check the console for details.");
-      }
-    };
-    reader.onerror = (error) => {
-      console.error("Error reading file:", error);
-      alert("Failed to read the selected file.");
-    };
-    reader.readAsText(file);
-
-    // Reset file input value to allow importing the same file again
-    event.target.value = '';
-  }, []);
-
   // Navigate to Reader page
   const handleSelectText = useCallback((text: TextEntry) => {
     setSelectedText(text);
@@ -105,11 +70,6 @@ const App: React.FC = () => {
     setKnownWords(words);
   }, []);
 
-  // Trigger file input click
-  const triggerImport = useCallback(() => {
-    document.getElementById('import-input')?.click();
-  }, []);
-
   return (
     <div className={styles.app} style={{ fontSize: `${fontSize}px` }}>
       <nav className={styles.nav}>
@@ -123,7 +83,7 @@ const App: React.FC = () => {
 
       {/* Conditional Rendering based on page state */}
       {page === 'home' && (
-        <HomePage onSelect={handleSelectText} onImport={triggerImport} />
+        <HomePage onSelect={handleSelectText} />
       )}
       {page === 'reader' && selectedText && (
         <Reader
@@ -141,16 +101,6 @@ const App: React.FC = () => {
           setFontSize={setFontSize}
         />
       )}
-
-      {/* Hidden file input */}
-      <input
-        id="import-input"
-        type="file"
-        accept="application/json"
-        className={styles.hiddenInput}
-        onChange={handleImportJSON}
-        aria-hidden="true" // Hide from accessibility tree as it's triggered by a button
-      />
     </div>
   );
 };

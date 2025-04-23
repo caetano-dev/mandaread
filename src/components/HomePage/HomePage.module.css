@@ -208,3 +208,79 @@
 .closeButton:hover {
   background-color: #c82333;
 }
+
+/* Styles for the new Import Modal */
+.modalInstructions {
+  font-size: 0.9em;
+  color: #ccc;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.importFormGroup {
+  margin-bottom: 1rem;
+}
+
+.importFormGroup label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+  color: #eee;
+}
+
+.importInput,
+.importTextarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #222; /* Darker input background */
+  color: #eee;
+  font-size: 1em;
+  box-sizing: border-box;
+  line-height: 1.4;
+}
+
+.importTextarea {
+  resize: vertical; /* Allow vertical resize */
+}
+
+.errorTextModal {
+  color: #ff8080; /* Lighter red for dark background */
+  margin-top: 1rem;
+  margin-bottom: 0;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+/* Adjust modal action buttons if needed */
+.submitButton {
+  padding: 8px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  background-color: #007bff; /* Blue for submit */
+  color: white;
+}
+
+.submitButton:hover {
+  background-color: #0056b3;
+}
+
+/* Ensure close button style is consistent */
+.closeButton {
+  padding: 8px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  background-color: #6c757d; /* Grey for cancel/close */
+  color: white;
+}
+
+.closeButton:hover {
+  background-color: #5a6268;
+}
