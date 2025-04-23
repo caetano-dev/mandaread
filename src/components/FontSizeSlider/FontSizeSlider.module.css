@@ -4,8 +4,6 @@
   border: 1px solid #444;
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.03);
-  justify-content: center;
-  align-items: center;
 }
 
 .label {
@@ -14,14 +12,6 @@
   font-weight: bold;
 }
 
-/* Style for the font size control group */
-.fontSizeControl {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
 .fontSizeValue {
-  min-width: 40px; /* Ensure space for text */
-  text-align: right;
+  min-width: 4px; /* Ensure space for text */
 }

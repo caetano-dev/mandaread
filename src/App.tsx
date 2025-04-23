@@ -76,7 +76,6 @@ const App: React.FC = () => {
         {/* Use a button or link for navigation for accessibility */}
         <button onClick={() => setPage('home')} className={styles.navTitleButton}>Mandaread</button>
         <div className={styles.navButtons}>
-          <button onClick={() => setPage('home')} disabled={page === 'home'}>Home</button>
           <button onClick={() => setPage('settings')} disabled={page === 'settings'}>Settings</button>
         </div>
       </nav>

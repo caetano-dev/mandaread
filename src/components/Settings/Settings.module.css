@@ -13,6 +13,7 @@
   flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
   gap: 0.5rem; /* Space between buttons */
   align-items: center; /* Align items vertically */
+  justify-content: center; /* Space between buttons and label */
 }
 
 .buttonGroup h3 {
