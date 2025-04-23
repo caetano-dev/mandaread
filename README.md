@@ -1,16 +1,16 @@
 # Mandaread - Mandarin Reading Program
 
-Mandaread is a web application designed to help users improve their Mandarin reading skills. It allows importing Mandarin texts (provided in a specific JSON format including Hanzi, Pinyin, and English translation), displays them with Pinyin above each character, and shows translations for words not yet marked as "known" by the user.
+Mandaread is a web application designed to help users improve their Mandarin reading skills. It allows importing Mandarin texts (provided via a modal input with pipe-separated values including Hanzi, Pinyin, and English translation), displays them with Pinyin above each character, and shows translations for words not yet marked as "known" by the user.
 
 ## Features
 
-*   **JSON Input:** Accepts Mandarin text structured in a specific JSON format (see below).
+*   **Text Input:** Allows importing Mandarin text via a modal on the homepage. Users input the title, and then provide the Mandarin (Hanzi), Pinyin, and English translation for each word/phrase, separated by pipe characters (`|`).
 *   **Homepage:**
     *   Displays a list of all imported texts.
     *   Shows a preview of the first 15 words of each text.
     *   Allows users to select a text to read.
     *   Allows users to delete imported texts.
-    *   Provides a button to import new texts via JSON file upload.
+    *   Provides a button to import new texts via the modal input.
 *   **Reading Interface:**
     *   Displays the full Mandarin text.
     *   Shows Pinyin transcription above each Hanzi character.
@@ -28,6 +28,7 @@ Mandaread is a web application designed to help users improve their Mandarin rea
         *   User settings (like font size).
     *   All data persists across browser sessions.
 *   **Styling:** Uses CSS Modules for component-scoped styling.
+*   **UUID:** `uuid` library for generating unique text IDs.
 
 ## Tech Stack
 
@@ -69,6 +70,7 @@ Mandaread is a web application designed to help users improve their Mandarin rea
     *   `index.css`: Global CSS styles.
     *   `main.tsx`: Entry point of the React application.
     *   `vite-env.d.ts`: TypeScript definitions for Vite environment variables.
+    *   `types/`: TypeScript type definitions (`index.ts`).
 *   `eslint.config.js`: ESLint configuration.
 *   `index.html`: Main HTML entry point.
 *   `package.json`: Project dependencies and scripts.
@@ -78,29 +80,14 @@ Mandaread is a web application designed to help users improve their Mandarin rea
 
 ## JSON Input Format
 
-Texts must be imported as a JSON file containing an array of word objects. Each object must have `hanzi`, `pinyin`, and `translation` properties.
+**Note:** Text import no longer uses JSON files directly. Instead, use the "Import New Text" button on the homepage, which provides fields to paste Mandarin, Pinyin, and English text, separating each word/phrase with a pipe character (`|`).
 
-**Example:**
+**Example of pipe-separated input:**
 
-```json
-[
-  {
-    "hanzi": "我",
-    "pinyin": "wǒ",
-    "translation": "I"
-  },
-  {
-    "hanzi": "喜欢",
-    "pinyin": "xǐhuan",
-    "translation": "like"
-  },
-  {
-    "hanzi": "苹果",
-    "pinyin": "píngguǒ",
-    "translation": "apple"
-  }
-]
-```
+*   **Title:** My Lesson
+*   **Mandarin:** 我|喜欢|苹果
+*   **Pinyin:** wǒ|xǐhuan|píngguǒ
+*   **English:** I|like|apple
 
 ## Vocabulary JSON Format
 

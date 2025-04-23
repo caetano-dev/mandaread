@@ -1,0 +1,124 @@
+/* Styles specific to the Import Text Modal */
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001; /* Ensure modal is above overlay */
+}
+
+.modalContent {
+  background-color: #333; /* Darker background for modal */
+  color: #eee; /* Light text */
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  text-align: left; /* Align text left for better readability */
+  position: relative; /* Needed for positioning close button if added */
+  max-width: 90%;
+  max-height: 80vh; /* Limit height */
+  overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+.modalTitle {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.modalInstructions {
+  font-size: 0.9em;
+  color: #ccc;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.importFormGroup {
+  margin-bottom: 1rem;
+}
+
+.importFormGroup label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+  color: #eee;
+}
+
+.importInput,
+.importTextarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #222; /* Darker input background */
+  color: #eee;
+  font-size: 1em;
+  box-sizing: border-box;
+  line-height: 1.4;
+}
+
+.importTextarea {
+  resize: vertical; /* Allow vertical resize */
+}
+
+.errorTextModal {
+  color: #ff8080; /* Lighter red for dark background */
+  margin-top: 1rem;
+  margin-bottom: 0;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+/* Container for modal action buttons */
+.modalActions {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  gap: 10px; /* Space between buttons */
+  margin-top: 20px;
+}
+
+.submitButton {
+  padding: 8px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  background-color: #007bff; /* Blue for submit */
+  color: white;
+}
+
+.submitButton:hover {
+  background-color: #0056b3;
+}
+
+.closeButton {
+  padding: 8px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  background-color: #6c757d; /* Grey for cancel/close */
+  color: white;
+}
+
+.closeButton:hover {
+  background-color: #5a6268;
+}
+
+/* Style for the prompt text at the bottom */
+.modalContent p:last-child {
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: #aaa;
+  text-align: center;
+}

@@ -27,10 +27,9 @@ interface ReaderProps {
   text: TextEntry;
   knownWords: Word[]; // Keep using Word type for props consistency
   setKnownWords: (words: Word[]) => void;
-  onBack: () => void;
 }
 
-const Reader: React.FC<ReaderProps> = ({ text, knownWords, setKnownWords, onBack }) => {
+const Reader: React.FC<ReaderProps> = ({ text, knownWords, setKnownWords }) => {
   // Memoize parsed words to avoid re-parsing on every render
   const words = useMemo(() => parseTextContent(text.content), [text.content]);
 
@@ -63,7 +62,6 @@ const Reader: React.FC<ReaderProps> = ({ text, knownWords, setKnownWords, onBack
 
   return (
     <div className={styles.readerContainer}>
-      <button className={styles.backButton} onClick={onBack}>Back</button>
       <h1 className={styles.textTitle}>{text.title}</h1>
       <div className={styles.wordsWrapper}>
         {words.map((word, idx) => {
