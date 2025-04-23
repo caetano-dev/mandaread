@@ -6,7 +6,6 @@ import {
   TextEntry
 } from '../../db/database';
 import styles from './HomePage.module.css';
-import { MdContentPaste } from "react-icons/md";
 import { Word } from '../../types';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -25,26 +24,6 @@ const parseTextContent = (content: string): ParsedWord[] => {
     return [];
   }
 };
-
-const promptText = `Write a story in mandarin and then output the story in this json format:
-[
-  {
-    "hanzi": "我",
-    "pinyin": "wǒ",
-    "translation": "I"
-  },
-  {
-    "hanzi": "喜欢",
-    "pinyin": "xǐhuan",
-    "translation": "like"
-  },
-  {
-    "hanzi": "苹果",
-    "pinyin": "píngguǒ",
-    "translation": "apple"
-  }
-]`;
-
 interface HomePageProps {
   onSelect: (text: TextEntry) => void;
 }
@@ -53,7 +32,6 @@ const HomePage: React.FC<HomePageProps> = ({ onSelect }) => {
   const [texts, setTexts] = useState<TextEntry[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [isPromptModalOpen, setIsPromptModalOpen] = useState(false);
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
 
   const [importTitle, setImportTitle] = useState('');
@@ -90,9 +68,6 @@ const HomePage: React.FC<HomePageProps> = ({ onSelect }) => {
     }
   }, []);
 
-  const togglePromptModal = useCallback(() => {
-    setIsPromptModalOpen(prev => !prev);
-  }, []);
 
   const toggleImportModal = useCallback(() => {
     setIsImportModalOpen(prev => !prev);
@@ -104,16 +79,6 @@ const HomePage: React.FC<HomePageProps> = ({ onSelect }) => {
       setImportError(null);
     }
   }, [isImportModalOpen]);
-
-  const copyToClipboard = useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(promptText);
-      alert('Prompt copied to clipboard!');
-    } catch (err) {
-      console.error('Failed to copy text: ', err);
-      alert('Failed to copy prompt.');
-    }
-  }, []);
 
   const handleImportSubmit = useCallback(async () => {
     setImportError(null);
@@ -204,23 +169,6 @@ const HomePage: React.FC<HomePageProps> = ({ onSelect }) => {
         </ul>
       )}
 
-      <button className={styles.floatingButton} onClick={togglePromptModal} aria-label="Show JSON format prompt">
-        <MdContentPaste />
-      </button>
-
-      {isPromptModalOpen && (
-        <div className={styles.modalOverlay} onClick={togglePromptModal}>
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="promptModalTitle">
-            <h3 id="promptModalTitle" className={styles.modalTitle}>Required JSON Format</h3>
-            <pre className={styles.promptPre}>{promptText}</pre>
-            <div className={styles.modalActions}>
-              <button onClick={copyToClipboard} className={styles.copyButton}>Copy Format</button>
-              <button onClick={togglePromptModal} className={styles.closeButton}>Close</button>
-            </div>
-          </div>
-        </div>
-      )}
-
       {isImportModalOpen && (
         <div className={styles.modalOverlay} onClick={toggleImportModal}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="importModalTitle">
@@ -280,6 +228,7 @@ const HomePage: React.FC<HomePageProps> = ({ onSelect }) => {
               <button onClick={handleImportSubmit} className={styles.submitButton}>Import Text</button>
               <button onClick={toggleImportModal} className={styles.closeButton}>Cancel</button>
             </div>
+            <p>Prompt: Write a text in Mandarin, Pinyin and English separating the words with a pipe (|). Example: 我|喜欢|学|中文</p>
           </div>
         </div>
       )}
