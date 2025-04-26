@@ -89,7 +89,6 @@ const App: React.FC = () => {
           text={selectedText}
           knownWords={knownWords}
           setKnownWords={handleSetKnownWords} // Pass the state updater
-          onBack={handleBackFromReader}
         />
       )}
       {page === 'settings' && (
