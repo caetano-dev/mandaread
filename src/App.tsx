@@ -4,11 +4,12 @@ import {
   getSetting,
   updateSetting as dbUpdateSetting,
   TextEntry
-} from './db/database'; // Import specific functions and types
+} from './db/database'; 
 import HomePage from './components/HomePage/HomePage';
 import Settings from './components/Settings/Settings';
 import Reader from './components/Reader/Reader';
-import { Word } from './types/index'; // Keep Word type for component props
+import NavBar from './components/NavBar/NavBar'; 
+import { Word } from './types/index'; 
 import styles from './App.module.css';
 
 // Define Page type
@@ -17,8 +18,8 @@ type Page = 'home' | 'reader' | 'settings';
 const App: React.FC = () => {
   const [knownWords, setKnownWords] = useState<Word[]>([]);
   const [page, setPage] = useState<Page>('home');
-  const [selectedText, setSelectedText] = useState<TextEntry | null>(null); // Use TextEntry type
-  const [fontSize, setFontSize] = useState<number>(20); // Default font size
+  const [selectedText, setSelectedText] = useState<TextEntry | null>(null); 
+  const [fontSize, setFontSize] = useState<number>(20);
 
   // Fetch initial data
   useEffect(() => {
@@ -28,7 +29,7 @@ const App: React.FC = () => {
           getVocabulary(),
           getSetting('fontSize')
         ]);
-        setKnownWords(vocabData); // Directly use VocabularyEntry[] which matches Word[]
+        setKnownWords(vocabData);
         if (fontSizeSetting) {
           setFontSize(fontSizeSetting.value as number);
         }
@@ -66,13 +67,8 @@ const App: React.FC = () => {
 
   return (
     <div className={styles.app} style={{ fontSize: `${fontSize}px` }}>
-      <nav className={styles.nav}>
-        {/* Use a button or link for navigation for accessibility */}
-        <button onClick={() => setPage('home')} className={styles.navTitleButton}>Mandaread</button>
-        <div className={styles.navButtons}>
-          <button onClick={() => setPage('settings')} disabled={page === 'settings'}>Settings</button>
-        </div>
-      </nav>
+      {/* Use the NavBar component */}
+      <NavBar page={page} setPage={setPage} />
 
       {/* Conditional Rendering based on page state */}
       {page === 'home' && (

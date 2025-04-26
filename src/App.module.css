@@ -6,56 +6,7 @@
   font-family: sans-serif;
 }
 
-.nav {
-  display: flex;
-  align-items: center; /* Align items vertically */
-  gap: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #444; /* Slightly darker border */
-  margin-bottom: 1.5rem; /* Increased margin */
-}
-
-.nav h1 {
-  margin: 0; /* Remove default margin */
-  font-size: 1.5rem;
-  cursor: pointer; /* Make title clickable */
-}
-
-.navTitleButton {
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: inherit; /* Inherit color from parent */
-  cursor: pointer;
-  margin-right: auto; /* Push buttons to the right */
-}
-
-.navButtons {
-  display: flex;
-  gap: 0.5rem; /* Space between nav buttons */
-}
-
-.nav button {
-  background-color: #333;
-  border: none;
-  color: #eee;
-  padding: 0.5em 1em; /* Add some padding */
-  border-radius: 4px; /* Rounded corners */
-}
-
-.nav button:hover:not(:disabled) {
-  background-color: #444;
-  border-color: transparent; /* Override default button hover */
-}
-
-.nav button:disabled {
-  background-color: #555;
-  color: #999;
-  cursor: not-allowed;
-}
+/* Styles related to .nav, .navTitleButton, .navButtons, .nav button were moved to NavBar.module.css */
 
 .hiddenInput {
   display: none;

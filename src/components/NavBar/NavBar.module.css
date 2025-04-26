@@ -1,0 +1,67 @@
+/* Styles for NavBar component */
+.nav {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #444; /* Slightly darker border */
+  margin-bottom: 1.5rem; /* Increased margin */
+}
+
+.navTitleButton {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: inherit; /* Inherit color from parent */
+  cursor: pointer;
+  margin-right: auto; /* Push buttons to the right */
+}
+
+.navButtons {
+  display: flex;
+  gap: 0.5rem; /* Space between nav buttons */
+}
+
+.nav button { /* Style applies to all buttons within .nav, including title */
+  background-color: #333;
+  border: none;
+  color: #eee;
+  padding: 0.5em 1em; /* Add some padding */
+  border-radius: 4px; /* Rounded corners */
+}
+
+.nav button:hover:not(:disabled) {
+  background-color: #444;
+  border-color: transparent; /* Override default button hover */
+}
+
+.nav button:disabled {
+  background-color: #555;
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* Ensure the title button doesn't get the background/padding of other buttons */
+.navTitleButton {
+    background: none;
+    padding: 0;
+    border: none;
+    color: inherit; /* Or specific color */
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.navTitleButton:hover:not(:disabled) {
+    background: none; /* Keep background transparent on hover */
+    /* Add other hover effects if desired, e.g., text-decoration */
+}
+
+.navTitleButton:disabled {
+    background: none; /* Keep background transparent when disabled */
+    color: #999; /* Example disabled color */
+    cursor: not-allowed;
+}
