@@ -58,12 +58,6 @@ const App: React.FC = () => {
     setPage('reader');
   }, []);
 
-  // Navigate back to Home page from Reader
-  const handleBackFromReader = useCallback(() => {
-    setSelectedText(null);
-    setPage('home');
-  }, []);
-
   // Update known words state (passed down to Reader/Settings)
   const handleSetKnownWords = useCallback((words: Word[]) => {
     // This function now just updates the state. DB operations are handled within components.
