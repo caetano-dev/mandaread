@@ -34,7 +34,7 @@ const App: React.FC = () => {
         }
       } catch (error) {
         console.error("Error loading initial data:", error);
-        // Handle error appropriately, maybe show a message to the user
+        alert("Failed to load initial data. Please try again later.");
       }
     };
     loadInitialData();
