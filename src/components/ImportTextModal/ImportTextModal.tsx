@@ -16,6 +16,12 @@ const ImportTextModal: React.FC<ImportTextModalProps> = ({ isOpen, onClose, onIm
   const [importPinyin, setImportPinyin] = useState('');
   const [importEnglish, setImportEnglish] = useState('');
   const [importError, setImportError] = useState<string | null>(null);
+  
+  // AI generation states
+  const [aiTheme, setAiTheme] = useState('');
+  const [aiLength, setAiLength] = useState('short');
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [showAiSection, setShowAiSection] = useState(false);
 
   const resetForm = useCallback(() => {
     setImportTitle('');
@@ -23,6 +29,10 @@ const ImportTextModal: React.FC<ImportTextModalProps> = ({ isOpen, onClose, onIm
     setImportPinyin('');
     setImportEnglish('');
     setImportError(null);
+    setAiTheme('');
+    setAiLength('short');
+    setIsGenerating(false);
+    setShowAiSection(false);
   }, []);
 
   const handleClose = useCallback(() => {
@@ -78,6 +88,108 @@ const ImportTextModal: React.FC<ImportTextModalProps> = ({ isOpen, onClose, onIm
     }
   }, [importTitle, importMandarin, importPinyin, importEnglish, onImportSuccess, handleClose]);
 
+  const handleGenerateAiText = useCallback(async () => {
+    if (!aiTheme.trim()) {
+      setImportError('Please enter a theme for the AI to generate text about.');
+      return;
+    }
+
+    // Check if Puter.js is available
+    if (typeof window === 'undefined' || !(window as any).puter) {
+      setImportError('AI service is not available. Please refresh the page and try again.');
+      return;
+    }
+
+    setIsGenerating(true);
+    setImportError(null);
+
+    try {
+      const lengthMap = {
+        'short': '5-8 words/phrases',
+        'medium': '10-15 words/phrases',
+        'long': '20-25 words/phrases'
+      };
+
+      const prompt = `Write a story in Chinese about "${aiTheme}" with ${lengthMap[aiLength as keyof typeof lengthMap]}. Format it exactly as follows:
+      
+Title: [A short title for the story]
+
+Mandarin: [Chinese text with words separated by | (pipe character)]
+Pinyin: [Pinyin with tone marks, words separated by | (pipe character)]  
+English: [English translation, words separated by | (pipe character)]
+
+Example format:
+Title: My Daily Routine
+
+Mandarin: 我|每天|早上|七点|起床|洗脸|刷牙|吃|早餐
+Pinyin: wǒ|měitiān|zǎoshang|qīdiǎn|qǐchuáng|xǐliǎn|shuāyá|chī|zǎocān
+English: I|every day|morning|seven o'clock|get up|wash face|brush teeth|eat|breakfast
+
+Make sure each section has the same number of segments separated by pipes (|). The story should be about "${aiTheme}" and be appropriate for Chinese language learners.`;
+
+      const response = await (window as any).puter.ai.chat(prompt, { model: "gpt-4.1-nano" });
+      
+      let content = '';
+      if (typeof response.message.content === 'string') {
+        content = response.message.content;
+      } else if (Array.isArray(response.message.content)) {
+        content = response.message.content[0]?.text || '';
+      }
+
+      if (!content) {
+        setImportError('AI returned empty response. Please try again.');
+        return;
+      }
+
+      // Parse the AI response
+      const lines = content.split('\n').filter(line => line.trim());
+      let titleLine = '';
+      let mandarinLine = '';
+      let pinyinLine = '';
+      let englishLine = '';
+
+      for (const line of lines) {
+        const cleanLine = line.trim();
+        if (cleanLine.toLowerCase().startsWith('title:')) {
+          titleLine = cleanLine.substring(6).trim();
+        } else if (cleanLine.toLowerCase().startsWith('mandarin:')) {
+          mandarinLine = cleanLine.substring(9).trim();
+        } else if (cleanLine.toLowerCase().startsWith('pinyin:')) {
+          pinyinLine = cleanLine.substring(7).trim();
+        } else if (cleanLine.toLowerCase().startsWith('english:')) {
+          englishLine = cleanLine.substring(8).trim();
+        }
+      }
+
+      if (titleLine && mandarinLine && pinyinLine && englishLine) {
+        // Validate that all sections have the same number of segments
+        const mandarinCount = mandarinLine.split('|').length;
+        const pinyinCount = pinyinLine.split('|').length;
+        const englishCount = englishLine.split('|').length;
+
+        if (mandarinCount !== pinyinCount || mandarinCount !== englishCount) {
+          setImportError(`AI generated inconsistent segments. Mandarin: ${mandarinCount}, Pinyin: ${pinyinCount}, English: ${englishCount}. Please try again.`);
+          return;
+        }
+
+        setImportTitle(titleLine);
+        setImportMandarin(mandarinLine);
+        setImportPinyin(pinyinLine);
+        setImportEnglish(englishLine);
+        setShowAiSection(false);
+      } else {
+        setImportError('Failed to parse AI response. Please try again or enter text manually.');
+      }
+
+    } catch (error) {
+      console.error('Error generating AI text:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+      setImportError(`Failed to generate text with AI: ${errorMessage}. Please check your connection and try again.`);
+    } finally {
+      setIsGenerating(false);
+    }
+  }, [aiTheme, aiLength]);
+
   if (!isOpen) {
     return null;
   }
@@ -87,6 +199,79 @@ const ImportTextModal: React.FC<ImportTextModalProps> = ({ isOpen, onClose, onIm
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="importModalTitle">
         <h3 id="importModalTitle" className={styles.modalTitle}>Import New Text</h3>
         <p className={styles.modalInstructions}>Enter the text title, then paste the Mandarin, Pinyin, and English versions below, separating each word/phrase with a pipe character (|).</p>
+        
+        <div className={styles.aiSection}>
+          <button
+            type="button"
+            onClick={() => setShowAiSection(!showAiSection)}
+            className={styles.aiToggleButton}
+            disabled={typeof window !== 'undefined' && !(window as any).puter}
+            title={typeof window !== 'undefined' && !(window as any).puter ? 'AI service is not available' : ''}
+          >
+            {showAiSection ? '📝 Manual Entry' : '🤖 Generate with AI'}
+          </button>
+          
+          {showAiSection && (
+            <div className={styles.aiControls}>
+              <div className={styles.importFormGroup}>
+                <label htmlFor="aiTheme">Theme/Topic:</label>
+                <input
+                  id="aiTheme"
+                  type="text"
+                  value={aiTheme}
+                  onChange={(e) => setAiTheme(e.target.value)}
+                  className={styles.importInput}
+                  placeholder="e.g., daily routine, family, food, travel, school"
+                  disabled={isGenerating}
+                />
+                <div className={styles.exampleThemes}>
+                  <span>Quick examples: </span>
+                  {['daily routine', 'family dinner', 'shopping', 'weather', 'hobbies'].map(theme => (
+                    <button
+                      key={theme}
+                      type="button"
+                      onClick={() => setAiTheme(theme)}
+                      className={styles.themeButton}
+                      disabled={isGenerating}
+                    >
+                      {theme}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              
+              <div className={styles.importFormGroup}>
+                <label htmlFor="aiLength">Text Length:</label>
+                <select
+                  id="aiLength"
+                  value={aiLength}
+                  onChange={(e) => setAiLength(e.target.value)}
+                  className={styles.importInput}
+                  disabled={isGenerating}
+                >
+                  <option value="short">Short (5-8 words)</option>
+                  <option value="medium">Medium (10-15 words)</option>
+                  <option value="long">Long (20-25 words)</option>
+                </select>
+              </div>
+              
+              <button
+                type="button"
+                onClick={handleGenerateAiText}
+                disabled={isGenerating || !aiTheme.trim()}
+                className={styles.generateButton}
+              >
+                {isGenerating ? '🔄 Generating...' : '✨ Generate Story'}
+              </button>
+              
+              {isGenerating && (
+                <div className={styles.generatingText}>
+                  Creating a story about "{aiTheme}"... This may take a few seconds.
+                </div>
+              )}
+            </div>
+          )}
+        </div>
 
         <div className={styles.importFormGroup}>
           <label htmlFor="importTitle">Title:</label>
