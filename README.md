@@ -4,7 +4,9 @@ Mandaread is a web application designed to help users improve their Mandarin rea
 
 ## Features
 
-*   **Text Input:** Allows importing Mandarin text via a modal on the homepage. Users input the title, and then provide the Mandarin (Hanzi), Pinyin, and English translation for each word/phrase, separated by pipe characters (`|`).
+*   **Text Input:** Allows importing Mandarin text via a modal on the homepage. Users can either:
+    *   Manually input the title and provide the Mandarin (Hanzi), Pinyin, and English translation for each word/phrase, separated by pipe characters (`|`)
+    *   Use AI-powered text generation to create stories automatically by selecting a theme and length
 *   **Homepage:**
     *   Displays a list of all imported texts.
     *   Shows a preview of the first 15 words of each text.
@@ -17,10 +19,15 @@ Mandaread is a web application designed to help users improve their Mandarin rea
     *   Displays the English translation below words that are *not* in the user's known vocabulary list.
     *   Allows users to click on any Hanzi word to mark it as "known", instantly hiding its translation and adding it to the persistent vocabulary list.
     *   Words are displayed inline, flowing like a standard text.
+    *   **Flashcard Export:** Export unknown words as CSV with AI-generated example phrases for flashcard creation.
 *   **Settings Page:**
     *   Allows users to import and export their known vocabulary list as a JSON file.
     *   Provides a slider to adjust the base font size for the reading interface.
     *   Displays the list of known words with an option to delete individual words.
+*   **AI Features:**
+    *   **Story Generation:** Create Chinese stories with proper formatting using AI (via Puter.js)
+    *   **Phrase Generation:** Generate contextual example phrases for unknown words during flashcard export
+    *   **No Setup Required:** Free AI access without API keys or backend setup
 *   **Persistent Storage:**
     *   Uses IndexedDB (via Dexie.js) in the browser to store:
         *   Imported texts.
@@ -32,10 +39,11 @@ Mandaread is a web application designed to help users improve their Mandarin rea
 
 ## Tech Stack
 
-*   **Frontend Framework:** React (with TypeScript)
+*   **Frontend Framework:** React (with TypeScript) + React Router
 *   **Build Tool:** Vite
 *   **Local Storage:** IndexedDB via Dexie.js
 *   **Styling:** CSS Modules
+*   **AI Integration:** Puter.js for free AI model access
 *   **UUID:** `uuid` library for generating unique text IDs.
 
 ## Getting Started
@@ -63,9 +71,13 @@ Mandaread is a web application designed to help users improve their Mandarin rea
         *   `HomePage/`: Files related to the home page (`HomePage.tsx`, `HomePage.module.css`).
         *   `Reader/`: Files related to the reading interface (`Reader.tsx`, `Reader.module.css`).
         *   `Settings/`: Files related to the settings page (`Settings.tsx`, `Settings.module.css`).
+        *   `ImportTextModal/`: Modal for text import with AI generation features.
+        *   `Layout/`: Layout component with navigation.
+    *   `contexts/`: React context providers for global state management.
+    *   `routes/`: Route components for different pages.
     *   `db/`: Database setup (`database.ts`).
     *   `assets/`: Image assets (`react.svg`).
-    *   `App.tsx`: Main application component (handles routing, global state).
+    *   `App.tsx`: Main application component with React Router configuration.
     *   `App.module.css`: CSS Module for the main App component.
     *   `index.css`: Global CSS styles.
     *   `main.tsx`: Entry point of the React application.
@@ -109,3 +121,29 @@ When exporting or importing vocabulary, the JSON file should contain an array of
   }
 ]
 ```
+
+## AI Features
+
+### Story Generation
+- Click "🤖 Generate with AI" in the import modal
+- Enter a theme (e.g., "daily routine", "family", "food")
+- Select story length (short, medium, or long)
+- AI creates properly formatted text with Hanzi, Pinyin, and English
+
+### Flashcard Export
+- Open any text in the Reader
+- Click "📄 Export Flashcards (X)" to export unknown words
+- AI generates contextual example phrases for each unknown word
+- Downloads CSV file with format: `Phrase_Hanzi;Phrase_Pinyin;Phrase_English`
+- Example CSV output:
+```csv
+Phrase_Hanzi,Phrase_Pinyin,Phrase_English
+我每天七点起床,wǒ měitiān qīdiǎn qǐchuáng,I get up at seven o'clock every day
+起床后我先洗脸,qǐchuáng hòu wǒ xiān xǐliǎn,After getting up I wash my face first
+```
+
+## Navigation
+The app uses React Router with the following routes:
+- `/` - Home page with text list
+- `/reader` - Reading interface for selected text
+- `/settings` - Settings and vocabulary management

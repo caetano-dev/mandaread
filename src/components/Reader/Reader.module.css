@@ -2,6 +2,102 @@
   padding: 1rem;
 }
 
+.readerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.readerControls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.exportButton {
+  padding: 0.6rem 1rem;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.exportButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.exportButton:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.exportButton:disabled:hover {
+  transform: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.exportError {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.exportProgress {
+  background-color: rgba(79, 70, 229, 0.1);
+  border: 1px solid rgba(79, 70, 229, 0.3);
+  border-radius: 6px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.progressBar {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  height: 8px;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+.progressFill {
+  background: linear-gradient(90deg, #4f46e5, #7c3aed);
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+.progressText {
+  color: #9ca3af;
+  font-size: 0.85em;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .readerHeader {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  
+  .exportButton {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 .backButton {
   margin-bottom: 1rem;
   padding: 0.5rem 1rem;
@@ -19,7 +115,7 @@
 .textTitle {
   font-size: 1.25rem;
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin: 0;
 }
 
 .wordsWrapper {

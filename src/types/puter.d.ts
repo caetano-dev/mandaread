@@ -1,7 +1,7 @@
 // TypeScript declarations for Puter.js
 declare global {
   interface Window {
-    puter: {
+    puter?: {
       ai: {
         chat: (prompt: string, options?: { model?: string }) => Promise<{
           message: {
@@ -9,7 +9,7 @@ declare global {
           };
         }>;
       };
-      print: (content: any) => void;
+      print: (content: unknown) => void;
     };
   }
 }
@@ -23,7 +23,7 @@ declare const puter: {
       };
     }>;
   };
-  print: (content: any) => void;
+  print: (content: unknown) => void;
 };
 
 export {};

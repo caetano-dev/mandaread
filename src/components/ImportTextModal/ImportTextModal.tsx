@@ -95,7 +95,7 @@ const ImportTextModal: React.FC<ImportTextModalProps> = ({ isOpen, onClose, onIm
     }
 
     // Check if Puter.js is available
-    if (typeof window === 'undefined' || !(window as any).puter) {
+    if (typeof window === 'undefined' || !window.puter) {
       setImportError('AI service is not available. Please refresh the page and try again.');
       return;
     }
@@ -127,7 +127,7 @@ English: I|every day|morning|seven o'clock|get up|wash face|brush teeth|eat|brea
 
 Make sure each section has the same number of segments separated by pipes (|). The story should be about "${aiTheme}" and be appropriate for Chinese language learners.`;
 
-      const response = await (window as any).puter.ai.chat(prompt, { model: "gpt-4.1-nano" });
+      const response = await window.puter.ai.chat(prompt, { model: "gpt-4.1-nano" });
       
       let content = '';
       if (typeof response.message.content === 'string') {
@@ -205,8 +205,8 @@ Make sure each section has the same number of segments separated by pipes (|). T
             type="button"
             onClick={() => setShowAiSection(!showAiSection)}
             className={styles.aiToggleButton}
-            disabled={typeof window !== 'undefined' && !(window as any).puter}
-            title={typeof window !== 'undefined' && !(window as any).puter ? 'AI service is not available' : ''}
+            disabled={typeof window !== 'undefined' && !window.puter}
+            title={typeof window !== 'undefined' && !window.puter ? 'AI service is not available' : ''}
           >
             {showAiSection ? '📝 Manual Entry' : '🤖 Generate with AI'}
           </button>
