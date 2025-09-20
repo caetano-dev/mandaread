@@ -1,0 +1,14 @@
+.layout {
+  max-width: 900px; /* Limit max width for better readability on large screens */
+  margin: 0 auto; /* Center the app */
+  padding: 1rem;
+  font-family: sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  overflow-y: auto;
+}

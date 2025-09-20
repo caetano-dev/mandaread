@@ -1,19 +1,15 @@
 import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './NavBar.module.css';
 
-type Page = 'home' | 'reader' | 'settings';
-
-interface NavBarProps {
-  page: Page;
-  setPage: (page: Page) => void;
-}
-
-const NavBar: React.FC<NavBarProps> = ({ page, setPage }) => {
+const NavBar: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   return (
     <nav className={styles.nav}>
-      <button onClick={() => setPage('home')} className={styles.navTitleButton}>Mandaread</button>
+      <button onClick={() => navigate('/')} className={styles.navTitleButton}>Mandaread</button>
       <div className={styles.navButtons}>
-        <button onClick={() => setPage('settings')} disabled={page === 'settings'}>Settings</button>
+        <button onClick={() => navigate('/settings')} disabled={location.pathname === '/settings'}>Settings</button>
       </div>
     </nav>
   );
