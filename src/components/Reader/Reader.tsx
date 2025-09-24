@@ -91,7 +91,7 @@ Format your response exactly as:
 
 Continue this pattern for all words. Each line should start with the number, followed by the phrase separated by | (pipe characters).`;
 
-      const response = await window.puter.ai.chat(prompt, { model: "gpt-4.1-nano" });
+      const response = await window.puter.ai.chat(prompt, { model: "gpt-4o" });
       
       let content = '';
       if (typeof response.message.content === 'string') {

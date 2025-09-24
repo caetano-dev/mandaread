@@ -7,6 +7,7 @@ Mandaread is a web application designed to help users improve their Mandarin rea
 *   **Text Input:** Allows importing Mandarin text via a modal on the homepage. Users can either:
     *   Manually input the title and provide the Mandarin (Hanzi), Pinyin, and English translation for each word/phrase, separated by pipe characters (`|`)
     *   Use AI-powered text generation to create stories automatically by selecting a theme and length
+*   **Standalone Flashcard Creation:** Dedicated section on the homepage to generate Chinese flashcards on any topic without needing to import texts first
 *   **Homepage:**
     *   Displays a list of all imported texts.
     *   Shows a preview of the first 15 words of each text.
@@ -27,6 +28,7 @@ Mandaread is a web application designed to help users improve their Mandarin rea
 *   **AI Features:**
     *   **Story Generation:** Create Chinese stories with proper formatting using AI (via Puter.js)
     *   **Phrase Generation:** Generate contextual example phrases for unknown words during flashcard export
+    *   **Standalone Flashcard Creation:** Generate themed flashcard sets (5-25 cards) directly from the homepage
     *   **No Setup Required:** Free AI access without API keys or backend setup
 *   **Persistent Storage:**
     *   Uses IndexedDB (via Dexie.js) in the browser to store:
@@ -130,11 +132,18 @@ When exporting or importing vocabulary, the JSON file should contain an array of
 - Select story length (short, medium, or long)
 - AI creates properly formatted text with Hanzi, Pinyin, and English
 
-### Flashcard Export
+### Standalone Flashcard Creation
+- Use the "🎯 Create Flashcards" section on the homepage
+- Enter any theme (e.g., "restaurant", "travel", "business")
+- Choose number of flashcards (5, 10, 15, 20, or 25)
+- AI generates themed flashcards and downloads them as CSV
+- No need to import texts first - create flashcards on any topic instantly
+
+### Flashcard Export from Texts
 - Open any text in the Reader
 - Click "📄 Export Flashcards (X)" to export unknown words
 - AI generates contextual example phrases for each unknown word
-- Downloads CSV file with format: `Phrase_Hanzi;Phrase_Pinyin;Phrase_English`
+- Downloads CSV file with format: `Phrase_Hanzi,Phrase_Pinyin,Phrase_English`
 - Example CSV output:
 ```csv
 Phrase_Hanzi,Phrase_Pinyin,Phrase_English

@@ -127,7 +127,7 @@ English: I|every day|morning|seven o'clock|get up|wash face|brush teeth|eat|brea
 
 Make sure each section has the same number of segments separated by pipes (|). The story should be about "${aiTheme}" and be appropriate for Chinese language learners.`;
 
-      const response = await window.puter.ai.chat(prompt, { model: "gpt-4.1-nano" });
+      const response = await window.puter.ai.chat(prompt, { model: "gpt-4o" });
       
       let content = '';
       if (typeof response.message.content === 'string') {
