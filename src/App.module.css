@@ -1,12 +1,12 @@
-/* General App Styles */
+/* General App Styles - Chinese Color Theme */
 .app {
   max-width: 900px; /* Limit max width for better readability on large screens */
   margin: 0 auto; /* Center the app */
   padding: 1rem;
   font-family: sans-serif;
+  background: linear-gradient(180deg, rgba(196, 30, 58, 0.02) 0%, rgba(212, 175, 55, 0.02) 100%);
+  min-height: 100vh;
 }
-
-/* Styles related to .nav, .navTitleButton, .navButtons, .nav button were moved to NavBar.module.css */
 
 .hiddenInput {
   display: none;
@@ -18,5 +18,24 @@
   align-items: center;
   height: 100vh;
   font-size: 1.2em;
-  color: #666;
+  color: #d4af37; /* Chinese gold */
+  background: radial-gradient(circle at center, rgba(196, 30, 58, 0.1) 0%, transparent 70%);
+}
+
+.loading::after {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  border: 2px solid #d4af37;
+  border-top-color: #c41e3a;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -4,8 +4,8 @@
 
 /* Flashcard Creation Section */
 .flashcardSection {
-  background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
-  border: 1px solid rgba(79, 70, 229, 0.2);
+  background: linear-gradient(135deg, rgba(200, 30, 30, 0.1) 0%, rgba(212, 175, 55, 0.1) 100%);
+  border: 1px solid rgba(200, 30, 30, 0.3);
   border-radius: 12px;
   padding: 1.5rem;
   margin-bottom: 2rem;
@@ -15,18 +15,18 @@
   font-size: 1.4rem;
   font-weight: bold;
   margin: 0 0 0.5rem 0;
-  color: #4f46e5;
+  color: #c81e1e;
 }
 
 .sectionDescription {
-  color: #6b7280;
+  color: #9ca3af;
   margin: 0 0 1.5rem 0;
   font-size: 0.95rem;
 }
 
 .flashcardControls {
   display: grid;
-  grid-template-columns: 1fr 200px 160px;
+  grid-template-columns: 1fr 200px auto;
   gap: 1rem;
   align-items: end;
   margin-bottom: 1rem;
@@ -48,15 +48,16 @@
   font-size: 0.9rem;
   font-weight: 500;
   margin-bottom: 0.3rem;
-  color: #374151;
+  color: #e5e7eb;
 }
 
 .themeInput,
 .countSelect {
   padding: 0.6rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid #d4af37;
   border-radius: 6px;
-  background-color: #ffffff;
+  background-color: #2a2a2a;
+  color: #e5e7eb;
   font-size: 0.9rem;
   transition: border-color 0.2s ease;
 }
@@ -64,20 +65,20 @@
 .themeInput:focus,
 .countSelect:focus {
   outline: none;
-  border-color: #4f46e5;
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  border-color: #c81e1e;
+  box-shadow: 0 0 0 3px rgba(200, 30, 30, 0.2);
 }
 
 .themeInput:disabled,
 .countSelect:disabled {
-  background-color: #f9fafb;
+  background-color: #1a1a1a;
   color: #6b7280;
   cursor: not-allowed;
 }
 
 .generateFlashcardsButton {
-  padding: 0.7rem 1.2rem;
-  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  padding: 0.7rem 1.5rem;
+  background: linear-gradient(135deg, #c81e1e 0%, #991b1b 100%);
   color: white;
   border: none;
   border-radius: 6px;
@@ -85,17 +86,20 @@
   font-size: 0.9rem;
   font-weight: 500;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   white-space: nowrap;
+  min-width: fit-content;
+  flex-shrink: 0;
 }
 
 .generateFlashcardsButton:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(200, 30, 30, 0.4);
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
 }
 
 .generateFlashcardsButton:disabled {
-  background: #9ca3af;
+  background: #6b7280;
   cursor: not-allowed;
   opacity: 0.7;
   transform: none;
@@ -112,14 +116,14 @@
 
 .quickThemesLabel {
   font-size: 0.85rem;
-  color: #6b7280;
+  color: #9ca3af;
   margin-right: 0.5rem;
 }
 
 .quickThemeButton {
-  background-color: #f3f4f6;
-  color: #374151;
-  border: 1px solid #d1d5db;
+  background-color: #3a3a3a;
+  color: #e5e7eb;
+  border: 1px solid #d4af37;
   border-radius: 16px;
   padding: 0.25rem 0.75rem;
   font-size: 0.8rem;
@@ -128,8 +132,9 @@
 }
 
 .quickThemeButton:hover:not(:disabled) {
-  background-color: #e5e7eb;
-  border-color: #9ca3af;
+  background-color: #4a4a4a;
+  border-color: #c81e1e;
+  color: #fff;
 }
 
 .quickThemeButton:disabled {
@@ -140,7 +145,7 @@
 .flashcardError {
   background-color: rgba(239, 68, 68, 0.1);
   border: 1px solid rgba(239, 68, 68, 0.3);
-  color: #dc2626;
+  color: #f87171;
   padding: 0.75rem;
   border-radius: 6px;
   font-size: 0.9rem;
@@ -149,7 +154,8 @@
 
 /* Text Section */
 .textSection {
-  background-color: rgba(255, 255, 255, 0.02);
+  background-color: rgba(212, 175, 55, 0.05);
+  border: 1px solid rgba(212, 175, 55, 0.2);
   border-radius: 8px;
   padding: 1rem;
 }
@@ -159,26 +165,29 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem; /* Increased spacing */
+  margin-bottom: 1.5rem;
 }
 
 .title {
   font-size: 1.5rem;
   font-weight: bold;
-  margin: 0; /* Remove default margin */
+  margin: 0;
+  color: #d4af37;
 }
 
 .importButton {
   padding: 0.5rem 1rem;
-  background-color: #007bff;
+  background: linear-gradient(135deg, #c81e1e 0%, #991b1b 100%);
   color: white;
   border: none;
   border-radius: 4px;
-  cursor: pointer; /* Add cursor pointer */
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .importButton:hover {
-  background-color: #0056b3;
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  box-shadow: 0 2px 8px rgba(200, 30, 30, 0.4);
 }
 
 .textList {
@@ -188,16 +197,18 @@
 
 .textItem {
   margin-bottom: 1rem;
-  border: 1px solid #ddd;
+  border: 1px solid #d4af37;
   padding: 0.5rem;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
-  transition: background-color 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  background-color: rgba(212, 175, 55, 0.05);
 }
 
 .textItem:hover {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(212, 175, 55, 0.1);
+  border-color: #c81e1e;
 }
 
 @media (min-width: 768px) {
@@ -214,15 +225,16 @@
 }
 
 .textInfo:hover {
-  background-color: rgba(255, 255, 255, 0.03); /* Subtle hover for the clickable area */
+  background-color: rgba(212, 175, 55, 0.05);
 }
 
 .textTitle {
   font-weight: 600;
+  color: #d4af37;
 }
 
 .textPreview {
-  color: #555;
+  color: #9ca3af;
   font-size: 0.9rem;
   white-space: nowrap;
   overflow: hidden;
@@ -230,13 +242,19 @@
 }
 
 .deleteButton {
-  margin-left: 1rem; /* Only applies on larger screens due to flex-direction change */
-  margin-top: 0.5rem; /* Only applies on smaller screens */
+  margin-left: 1rem;
+  margin-top: 0.5rem;
   padding: 0.25rem 0.5rem;
-  background-color: #dc3545;
+  background-color: #991b1b;
   color: white;
   border: none;
   border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.deleteButton:hover {
+  background-color: #c81e1e;
 }
 
 @media (min-width: 768px) {
@@ -252,24 +270,25 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: #007bff;
+  background: linear-gradient(135deg, #c81e1e 0%, #991b1b 100%);
   color: white;
-  border: none;
+  border: 2px solid #d4af37;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 24px;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1000; /* Ensure it's above other content */
+  box-shadow: 0 4px 12px rgba(200, 30, 30, 0.4);
+  z-index: 1000;
 }
 
 .floatingButton:hover {
-  background-color: #0056b3;
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  transform: scale(1.05);
 }
 
 /* Error message styling */
 .errorText {
-  color: #dc3545; /* Red color for errors */
+  color: #f87171;
   margin-bottom: 1rem;
 }

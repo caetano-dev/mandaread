@@ -6,6 +6,7 @@
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  color: #d4af37; /* Chinese gold */
 }
 
 .buttonGroup {
@@ -19,6 +20,7 @@
 .buttonGroup h3 {
   width: 100%; /* Make label take full width */
   margin-bottom: 0.5rem;
+  color: #f0e6d3; /* Light cream */
 }
 
 .exportButton,
@@ -28,28 +30,39 @@
   padding: 0.6em 1.2em;
   border-radius: 4px;
   cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .exportButton {
-  background-color: #28a745;
+  background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%); /* Chinese red gradient */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .exportButton:hover:not(:disabled) {
-  background-color: #218838;
+  background: linear-gradient(135deg, #d4372e 0%, #a52a2a 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .importButton {
-  background-color: #007bff;
+  background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%); /* Chinese gold gradient */
+  color: #1a1a1a;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .importButton:hover:not(:disabled) {
-  background-color: #0056b3;
+  background: linear-gradient(135deg, #e6c547 0%, #daa520 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* Style for disabled buttons */
 .exportButton:disabled,
 .importButton:disabled {
-  background-color: #555;
+  background: #555;
   color: #999;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .hiddenInput {
@@ -59,7 +72,7 @@
 .subtitle {
   font-size: 1.2rem;
   margin-bottom: 1rem;
-  color: #eee;
+  color: #f0e6d3; /* Light cream */
 }
 
 /* Add styles for the search bar */
@@ -67,11 +80,17 @@
   width: 100%;
   padding: 0.5rem;
   margin-bottom: 1rem;
-  border: 1px solid #555;
+  border: 1px solid #d4af37; /* Chinese gold border */
   border-radius: 4px;
-  background-color: #333;
-  color: #eee;
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  background-color: #2a2020; /* Dark reddish background */
+  color: #f0e6d3; /* Light cream text */
+  box-sizing: border-box;
+}
+
+.searchBar:focus {
+  outline: none;
+  border-color: #c41e3a; /* Chinese red on focus */
+  box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.2);
 }
 
 .vocabularyList {
@@ -79,15 +98,16 @@
   padding: 0;
   max-height: 300px; /* Limit height and make scrollable */
   overflow-y: auto;
-  border: 1px solid #555;
+  border: 1px solid #d4af37; /* Chinese gold border */
   border-radius: 4px;
-  margin-top: 0.5rem; /* Add some space above the list */
+  margin-top: 0.5rem;
+  background-color: #2a2020; /* Dark reddish background */
 }
 
 /* Style for the 'no results' item */
 .noResultsItem {
   padding: 0.5rem 1rem;
-  color: #aaa;
+  color: #d4af37; /* Chinese gold */
   font-style: italic;
 }
 
@@ -96,8 +116,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;
-  border-bottom: 1px solid #555;
-  gap: 1rem; /* Add gap between elements */
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3); /* Subtle gold border */
+  gap: 1rem;
 }
 
 .vocabularyItem:last-child {
@@ -105,41 +125,44 @@
 }
 
 .vocabularyItem span {
-  flex-shrink: 0; /* Prevent shrinking */
+  flex-shrink: 0;
 }
 
 /* Specific styles for vocab parts for alignment */
 .vocabHanzi {
-  flex-basis: 80px; /* Give Hanzi a fixed basis */
+  flex-basis: 80px;
   font-weight: bold;
+  color: #c41e3a; /* Chinese red */
 }
 
 .vocabPinyin {
-  flex-basis: 120px; /* Give Pinyin a fixed basis */
-  color: #ccc;
+  flex-basis: 120px;
+  color: #d4af37; /* Chinese gold */
 }
 
 .vocabTranslation {
-  flex-grow: 1; /* Allow translation to take remaining space */
+  flex-grow: 1;
   text-align: left;
-  color: #aaa;
+  color: #f0e6d3; /* Light cream */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .deleteButton {
-  background-color: #b03030;
+  background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
   color: white;
   border: none;
   padding: 0.3em 0.6em;
   font-size: 0.9em;
   border-radius: 4px;
   cursor: pointer;
-  margin-left: auto; /* Push delete button to the far right */
-  flex-shrink: 0; /* Prevent shrinking */
+  margin-left: auto;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
 }
 
 .deleteButton:hover {
-  background-color: #c84040;
+  background: linear-gradient(135deg, #d4372e 0%, #a52a2a 100%);
+  transform: translateY(-1px);
 }

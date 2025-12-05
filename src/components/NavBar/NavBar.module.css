@@ -1,11 +1,14 @@
-/* Styles for NavBar component */
+/* Styles for NavBar component - Chinese Red & Gold Theme */
 .nav {
   display: flex;
   align-items: center; /* Align items vertically */
   gap: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #444; /* Slightly darker border */
+  border-bottom: 2px solid #c9a227; /* Gold border */
   margin-bottom: 1.5rem; /* Increased margin */
+  background: linear-gradient(135deg, rgba(139, 0, 0, 0.1) 0%, rgba(201, 162, 39, 0.1) 100%);
+  padding: 1rem;
+  border-radius: 8px;
 }
 
 .navTitleButton {
@@ -15,9 +18,21 @@
   margin: 0;
   font-size: 1.5rem;
   font-weight: bold;
-  color: inherit; /* Inherit color from parent */
+  color: #c9a227; /* Gold color for title */
   cursor: pointer;
   margin-right: auto; /* Push buttons to the right */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.navTitleButton:hover:not(:disabled) {
+  background: none; /* Keep background transparent on hover */
+  color: #e6c84b; /* Lighter gold on hover */
+}
+
+.navTitleButton:disabled {
+  background: none; /* Keep background transparent when disabled */
+  color: #666; /* Disabled color */
+  cursor: not-allowed;
 }
 
 .navButtons {
@@ -25,43 +40,24 @@
   gap: 0.5rem; /* Space between nav buttons */
 }
 
-.nav button { /* Style applies to all buttons within .nav, including title */
-  background-color: #333;
-  border: none;
-  color: #eee;
+.nav button { /* Style applies to all buttons within .nav */
+  background-color: #8b0000; /* Chinese red */
+  border: 1px solid #c9a227; /* Gold border */
+  color: #f5f5dc; /* Beige/cream text */
   padding: 0.5em 1em; /* Add some padding */
   border-radius: 4px; /* Rounded corners */
+  transition: all 0.3s ease;
 }
 
 .nav button:hover:not(:disabled) {
-  background-color: #444;
-  border-color: transparent; /* Override default button hover */
+  background-color: #a52a2a; /* Lighter red on hover */
+  border-color: #e6c84b; /* Lighter gold border */
+  box-shadow: 0 2px 8px rgba(201, 162, 39, 0.3);
 }
 
 .nav button:disabled {
-  background-color: #555;
-  color: #999;
+  background-color: #4a4a4a;
+  color: #888;
+  border-color: #666;
   cursor: not-allowed;
-}
-
-/* Ensure the title button doesn't get the background/padding of other buttons */
-.navTitleButton {
-    background: none;
-    padding: 0;
-    border: none;
-    color: inherit; /* Or specific color */
-    font-size: 1.5rem;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.navTitleButton:hover:not(:disabled) {
-    background: none; /* Keep background transparent on hover */
-    /* Add other hover effects if desired, e.g., text-decoration */
-}
-
-.navTitleButton:disabled {
-    background: none; /* Keep background transparent when disabled */
-    color: #999; /* Example disabled color */
-    cursor: not-allowed;
 }

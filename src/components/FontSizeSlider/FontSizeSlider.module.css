@@ -1,17 +1,19 @@
 .settingItem {
   margin-bottom: 1.5rem; /* Increase spacing */
   padding: 1rem;
-  border: 1px solid #444;
+  border: 1px solid #8B0000; /* Dark red border */
   border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.03);
+  background-color: rgba(139, 0, 0, 0.05); /* Subtle red tint */
 }
 
 .label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: bold;
+  color: #D4AF37; /* Gold color */
 }
 
 .fontSizeValue {
   min-width: 4px; /* Ensure space for text */
+  color: #FFD700; /* Bright gold */
 }

@@ -1,18 +1,36 @@
-/* Removed Tailwind directives */
+/* Global styles with Chinese color theme */
+/* Primary colors: Chinese Red (#c41e3a), Gold (#d4af37), Jade (#00a86b) */
 
-/* Add base styles here if needed */
+:root {
+  --chinese-red: #c41e3a;
+  --chinese-red-dark: #a01830;
+  --chinese-red-light: #e63950;
+  --chinese-gold: #d4af37;
+  --chinese-gold-dark: #b8962e;
+  --chinese-gold-light: #e5c35a;
+  --chinese-jade: #00a86b;
+  --chinese-jade-dark: #008856;
+  --chinese-jade-light: #00c87a;
+  --chinese-black: #1a1a1a;
+  --chinese-dark-bg: #242424;
+  --chinese-dark-surface: #2d2d2d;
+  --chinese-text-light: rgba(255, 255, 255, 0.87);
+  --chinese-text-muted: #aaa;
+  --chinese-border: #444;
+}
+
 body {
   margin: 0;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--chinese-text-light);
+  background-color: var(--chinese-dark-bg);
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Align content to the top */
+  align-items: flex-start;
   padding: 2rem;
 }
 
@@ -29,21 +47,48 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--chinese-black);
+  color: var(--chinese-text-light);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.25s, background-color 0.25s;
   margin: 0.5em;
 }
+
 button:hover {
-  border-color: #646cff;
+  border-color: var(--chinese-gold);
 }
+
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 2px solid var(--chinese-gold);
+  outline-offset: 2px;
 }
 
 input[type="file"] {
   margin: 1em 0;
 }
 
-/* Add other global styles */
+/* Scrollbar styling for Chinese theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--chinese-dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--chinese-red-dark);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--chinese-red);
+}
+
+/* Selection styling */
+::selection {
+  background-color: var(--chinese-red);
+  color: white;
+}

@@ -133,7 +133,7 @@ When exporting or importing vocabulary, the JSON file should contain an array of
 - AI creates properly formatted text with Hanzi, Pinyin, and English
 
 ### Standalone Flashcard Creation
-- Use the "🎯 Create Flashcards" section on the homepage
+- Use the "Create Flashcards" section on the homepage
 - Enter any theme (e.g., "restaurant", "travel", "business")
 - Choose number of flashcards (5, 10, 15, 20, or 25)
 - AI generates themed flashcards and downloads them as CSV

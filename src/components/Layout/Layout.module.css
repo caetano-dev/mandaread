@@ -1,11 +1,15 @@
+/* Chinese Red & Gold Theme Layout */
 .layout {
-  max-width: 900px; /* Limit max width for better readability on large screens */
-  margin: 0 auto; /* Center the app */
+  max-width: 900px;
+  margin: 0 auto;
   padding: 1rem;
   font-family: sans-serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #1a1a1a;
+  border-left: 1px solid rgba(212, 175, 55, 0.1);
+  border-right: 1px solid rgba(212, 175, 55, 0.1);
 }
 
 .main {

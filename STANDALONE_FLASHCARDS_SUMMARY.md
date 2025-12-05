@@ -2,7 +2,7 @@
 
 ## Overview
 
-The homepage now includes a dedicated "🎯 Create Flashcards" section that allows users to generate Chinese language flashcards on any topic without needing to import texts first. This feature uses AI to create themed vocabulary sets with Hanzi, Pinyin, and English translations.
+The homepage now includes a dedicated "Create Flashcards" section that allows users to generate Chinese language flashcards on any topic without needing to import texts first. This feature uses AI to create themed vocabulary sets with Hanzi, Pinyin, and English translations.
 
 ## Features
 

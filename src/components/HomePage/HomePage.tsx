@@ -195,7 +195,7 @@ Continue this pattern for all ${flashcardCount} phrases. Each line should start 
     <div className={styles.homePage}>
       {/* Flashcard Creation Section */}
       <div className={styles.flashcardSection}>
-        <h2 className={styles.sectionTitle}>🎯 Create Flashcards</h2>
+        <h2 className={styles.sectionTitle}>Create Flashcards</h2>
         <p className={styles.sectionDescription}>Generate Chinese flashcards on any topic using AI</p>
         
         <div className={styles.flashcardControls}>
@@ -263,7 +263,7 @@ Continue this pattern for all ${flashcardCount} phrases. Each line should start 
       {/* Existing Text Import Section */}
       <div className={styles.textSection}>
         <div className={styles.header}>
-          <h2 className={styles.title}>📚 Your Imported Texts</h2>
+          <h2 className={styles.title}>Your Imported Texts</h2>
           <button className={styles.importButton} onClick={toggleImportModal}>Import New Text</button>
         </div>
 

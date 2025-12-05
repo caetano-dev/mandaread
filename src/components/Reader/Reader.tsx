@@ -261,6 +261,7 @@ Continue this pattern for all words. Each line should start with the number, fol
           );
         })}
       </div>
+      <p>Click on the words you know to add them to you vocabulary</p>
     </div>
   );
 };

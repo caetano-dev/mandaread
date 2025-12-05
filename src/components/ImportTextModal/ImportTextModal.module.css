@@ -6,7 +6,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,16 +14,17 @@
 }
 
 .modalContent {
-  background-color: #333; /* Darker background for modal */
-  color: #eee; /* Light text */
+  background-color: #1a1a1a; /* Dark background for modal */
+  color: #f5f0e6; /* Warm off-white text */
   padding: 20px 30px;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 175, 55, 0.2);
   text-align: left; /* Align text left for better readability */
   position: relative; /* Needed for positioning close button if added */
   max-width: 90%;
   max-height: 80vh; /* Limit height */
   overflow-y: auto; /* Allow scrolling if content overflows */
+  border: 1px solid rgba(212, 175, 55, 0.3);
 }
 
 .modalTitle {
@@ -32,11 +33,12 @@
   margin-top: 0;
   margin-bottom: 15px;
   text-align: center;
+  color: #d4af37; /* Chinese gold */
 }
 
 .modalInstructions {
   font-size: 0.9em;
-  color: #ccc;
+  color: #b8a88a; /* Warm muted color */
   margin-bottom: 1rem;
   line-height: 1.4;
 }
@@ -49,20 +51,28 @@
   display: block;
   margin-bottom: 0.3rem;
   font-weight: bold;
-  color: #eee;
+  color: #f5f0e6;
 }
 
 .importInput,
 .importTextarea {
   width: 100%;
   padding: 0.6rem;
-  border: 1px solid #555;
-  border-radius: 4px;
-  background-color: #222; /* Darker input background */
-  color: #eee;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 6px;
+  background-color: #242424; /* Dark input background */
+  color: #f5f0e6;
   font-size: 1em;
   box-sizing: border-box;
   line-height: 1.4;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.importInput:focus,
+.importTextarea:focus {
+  outline: none;
+  border-color: #d4af37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
 }
 
 .importTextarea {
@@ -70,7 +80,7 @@
 }
 
 .errorTextModal {
-  color: #ff8080; /* Lighter red for dark background */
+  color: #ff6b6b; /* Softer red for errors */
   margin-top: 1rem;
   margin-bottom: 0;
   font-size: 0.9em;
@@ -89,37 +99,43 @@
   padding: 8px 15px;
   margin: 5px;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 0.9em;
-  background-color: #007bff; /* Blue for submit */
+  background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%); /* Chinese red gradient */
   color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .submitButton:hover {
-  background-color: #0056b3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(196, 30, 58, 0.3);
 }
 
 .closeButton {
   padding: 8px 15px;
   margin: 5px;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 0.9em;
-  background-color: #6c757d; /* Grey for cancel/close */
-  color: white;
+  background-color: #3a3a3a;
+  color: #b8a88a;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  transition: all 0.2s ease;
 }
 
 .closeButton:hover {
-  background-color: #5a6268;
+  background-color: #4a4a4a;
+  border-color: rgba(212, 175, 55, 0.4);
 }
 
 /* Style for the prompt text at the bottom */
 .modalContent p:last-child {
   margin-top: 20px;
   font-size: 0.9em;
-  color: #aaa;
+  color: #8a7a5a;
   text-align: center;
 }
 
@@ -127,20 +143,20 @@
 .aiSection {
   margin-bottom: 2rem;
   padding: 1rem;
-  background-color: #2a2a2a;
-  border-radius: 6px;
-  border: 1px solid #444;
+  background-color: rgba(212, 175, 55, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .aiToggleButton {
   padding: 10px 16px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%); /* Gold gradient */
+  color: #1a1a1a;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.95em;
-  font-weight: 500;
+  font-weight: 600;
   width: 100%;
   margin-bottom: 1rem;
   transition: all 0.3s ease;
@@ -149,7 +165,7 @@
 
 .aiToggleButton:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(212, 175, 55, 0.3);
 }
 
 .aiControls {
@@ -169,7 +185,7 @@
 
 .generateButton {
   padding: 12px 20px;
-  background: linear-gradient(135deg, #42e695 0%, #3bb2b8 100%);
+  background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%); /* Chinese red gradient */
   color: white;
   border: none;
   border-radius: 6px;
@@ -184,11 +200,11 @@
 
 .generateButton:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(196, 30, 58, 0.3);
 }
 
 .generateButton:disabled {
-  background: #555;
+  background: #3a3a3a;
   cursor: not-allowed;
   opacity: 0.7;
 }
@@ -202,7 +218,7 @@
 .exampleThemes {
   margin-top: 0.5rem;
   font-size: 0.85em;
-  color: #bbb;
+  color: #b8a88a;
 }
 
 .exampleThemes span {
@@ -210,9 +226,9 @@
 }
 
 .themeButton {
-  background-color: #444;
-  color: #ddd;
-  border: 1px solid #555;
+  background-color: rgba(212, 175, 55, 0.1);
+  color: #d4af37;
+  border: 1px solid rgba(212, 175, 55, 0.3);
   border-radius: 12px;
   padding: 4px 8px;
   margin: 2px 4px 2px 0;
@@ -222,8 +238,8 @@
 }
 
 .themeButton:hover:not(:disabled) {
-  background-color: #555;
-  border-color: #666;
+  background-color: rgba(212, 175, 55, 0.2);
+  border-color: rgba(212, 175, 55, 0.5);
 }
 
 .themeButton:disabled {
@@ -235,7 +251,7 @@
 .generatingText {
   margin-top: 1rem;
   text-align: center;
-  color: #42e695;
+  color: #d4af37;
   font-size: 0.9em;
   font-style: italic;
   animation: pulse 2s infinite;
