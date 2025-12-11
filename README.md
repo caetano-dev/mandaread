@@ -2,6 +2,10 @@
 
 Mandaread is a web application designed to help users improve their Mandarin reading skills. It allows importing Mandarin texts (provided via a modal input with pipe-separated values including Hanzi, Pinyin, and English translation), displays them with Pinyin above each character, and shows translations for words not yet marked as "known" by the user.
 
+<img width="1918" height="1142" alt="Screenshot 2025-12-11 at 10-13-38 Mandaread 学中文" src="https://github.com/user-attachments/assets/44b55af7-ac9c-43cf-8e34-c6f1fea83b0f" />
+<img width="1918" height="1142" alt="Screenshot 2025-12-11 at 10-14-23 Mandaread 学中文" src="https://github.com/user-attachments/assets/c2d808d1-198a-471e-9b6a-814e6a425e63" />
+<img width="1918" height="1142" alt="Screenshot 2025-12-11 at 10-14-43 Mandaread 学中文" src="https://github.com/user-attachments/assets/2a7a25eb-4012-490b-8053-a60495842456" />
+
 ## Features
 
 *   **Text Input:** Allows importing Mandarin text via a modal on the homepage. Users can either:
